@@ -2,9 +2,19 @@ package karol.shop.models;
 
 public interface IProductRepository {
 
+    // void addProduct(Product product)
+    // void removeProduct(Product product)
 
 
-//    title, photo, price(delivery), price(non-delivery), description, quantity, id, details, reviews
+    // getProduct()
+    // getProducts()
+    // getNProducts(int n)
+
+
+
+
+
+
     // po rozwinięciu szczegółów mamy dwie kategorie, szczegóły produktu - np. dostawy i opinie.
     // aplikacja powinna umozliwiac pokazanie modeli produktów jakie mamy na stanie
 }

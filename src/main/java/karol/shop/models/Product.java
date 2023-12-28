@@ -8,6 +8,7 @@ import lombok.Setter;
 public class Product
 {
     private String productId;
+    private String modelId;
     private String title;
     private String photoUrl;
     private Double price;
@@ -16,8 +17,9 @@ public class Product
     private Integer quantity;
     private String details;
 
-    public Product(String productId, String title, String photoUrl, Double price, Double deliveryPrice, String description, Integer quantity, String details) {
+    public Product(String productId, String modelId, String title, String photoUrl, Double price, Double deliveryPrice, String description, Integer quantity, String details) {
         this.productId = productId;
+        this.modelId = modelId;
         this.title = title;
         this.photoUrl = photoUrl;
         this.price = price;
