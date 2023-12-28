@@ -1,4 +1,6 @@
-package karol.shop.models;
+package karol.shop.models.old;
+
+import karol.shop.models.Review;
 
 import java.util.ArrayList;
 

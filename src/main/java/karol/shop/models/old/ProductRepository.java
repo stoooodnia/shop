@@ -1,4 +1,4 @@
-package karol.shop.models;
+package karol.shop.models.old;
 
 public class ProductRepository implements IProductRepository{
     private IProductsDao ProductsDao;

@@ -1,4 +1,4 @@
-package karol.shop.models;
+package karol.shop.models.old;
 
 public interface IProductRepository {
 
