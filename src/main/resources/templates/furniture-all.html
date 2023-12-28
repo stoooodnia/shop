@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>All persons</title>
+    <link rel="stylesheet"  th:href="@{/style.css}"/>
+</head>
+<body>
+
+<div th:if="${successMessage}">
+    <div th:text="${successMessage}" />
+</div>
+
+<h1>All furniture</h1>
+
+<div th:if="${errorMessage}">
+    <p th:text="${errorMessage}" ></p>
+</div>
+
+<div class="all-furniture-container">
+    <div class="furniture" th:each="furniture : ${allFurniture}">
+        <div th:text="${furniture.id}"></div>
+        <div th:text="${furniture.name}"></div>
+        <div th:text="${furniture.category}"></div>
+        <div th:text="${furniture.price}"></div>
+        <a class="details" th:href="@{/furniture/{id}(id=${furniture.getId()})}">Details</a>
+        <a class="delete" th:href="@{/furniture/delete/{id}(id=${furniture.getId()})}">Delete</a>
+        <a class="edit" th:href="@{/furniture/edit/{id}(id=${furniture.getId()})}">Edit</a>
+    </div>
+</div>
+<a class="button" th:href="@{/furniture/form}">Add new furniture</a>
+
+</body>
+</html>
