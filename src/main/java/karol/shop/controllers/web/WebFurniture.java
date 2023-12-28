@@ -19,15 +19,15 @@ public class WebFurniture {
         this.furnitureService = furnitureService;
     }
 
-    @GetMapping("/furniture")
+    @GetMapping("/shop")
     public String furniture(Model model) {
-        model.addAttribute("allFurniture", furnitureService.listAll());
-        return "furniture-all";
+        model.addAttribute("allProducts", furnitureService.listAll());
+        return "products-all";
     }
 
     @GetMapping("/furniture/{id}")
     public String furnitureDetail(Model model, @PathVariable("id") String id){
-        System.out.println("iddd  " + id);
+        System.out.println("id  " + id);
         model.addAttribute("furnitureDetails", furnitureService.getFurniturePieceByID(id));
 //        System.out.println(furnitureService.getFurniturePieceByID(id).name);
         return "furniture-details";
@@ -49,7 +49,7 @@ public class WebFurniture {
         }
         furnitureService.addNewFurniturePiece(furnitureToAdd);
         model.addAttribute("allFurniture", furnitureService.listAll());
-        return "furniture-all";
+        return "products-all";
     }
 
     @GetMapping("/furniture/delete/{id}")
@@ -72,7 +72,7 @@ public class WebFurniture {
         } else {
             model.addAttribute("errorMessage", "Nie znaleziono mebla o id: " + id);
             model.addAttribute("allFurniture", furnitureService.listAll());
-            return "furniture-all";
+            return "products-all";
         }
     }
 
