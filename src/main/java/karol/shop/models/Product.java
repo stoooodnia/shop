@@ -16,7 +16,16 @@ public class Product
     private Integer quantity;
     private String details;
 
-
+    public Product(String productId, String title, String photoUrl, Double price, Double deliveryPrice, String description, Integer quantity, String details) {
+        this.productId = productId;
+        this.title = title;
+        this.photoUrl = photoUrl;
+        this.price = price;
+        this.deliveryPrice = deliveryPrice;
+        this.description = description;
+        this.quantity = quantity;
+        this.details = details;
+    }
 }
 
 

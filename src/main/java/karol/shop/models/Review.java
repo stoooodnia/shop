@@ -14,4 +14,13 @@ public class Review {
     private String date;
     private Integer grade; // 1 to 5 stars
     private String content;
+
+    public Review(String productId, String reviewId, String author, String date, Integer grade, String content) {
+        this.productId = productId;
+        this.reviewId = reviewId;
+        this.author = author;
+        this.date = date;
+        this.grade = grade;
+        this.content = content;
+    }
 }
