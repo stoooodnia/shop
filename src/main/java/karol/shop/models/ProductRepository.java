@@ -1,6 +1,6 @@
 package karol.shop.models;
 
-public class ProductRepository {
+public class ProductRepository implements IProductRepository{
     private IProductsDao ProductsDao;
     private IReviewsDao ReviewsDao;
 
