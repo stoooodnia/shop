@@ -31,7 +31,9 @@ public class ProductRepository implements IProductRepository{
 
     @Override
     public Integer getAverageRatingOf(Long productId) {
-        ReviewsDao.findByProductId(productId);
+        // Stream API
+        return ReviewsDao.findByProductId(productId).stream()
+                .reduce(0, (sum, review) -> sum + review.getRating(), Integer::sum) / ReviewsDao.findByProductId(productId).size();
 
     }
 
