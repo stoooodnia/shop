@@ -13,7 +13,7 @@ public interface IProductRepository {
     // admin
     void addProduct(Product product); // dodaje produkt
     void deleteReview(Long reviewId); // usuwa recenzje
-    void editReview(Long reviewId, Review review); // edytuje recenzje czyli te komentarz
+    void editReview(Review review); // edytuje recenzje czyli te komentarz
 
 
 

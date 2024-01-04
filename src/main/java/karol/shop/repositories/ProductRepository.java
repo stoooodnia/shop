@@ -52,16 +52,9 @@ public class ProductRepository implements IProductRepository{
         ReviewDao.deleteById(reviewId);
     }
 
-    }
-
     @Override
-    public void editReview() {
-
-    }
-
-    @Override
-    public void editComment() {
-
+    public void editReview(Review review) {
+        ReviewDao.save(review); // TODO: to dziala przekornie, sprawdzic czy dziala
     }
 
 
