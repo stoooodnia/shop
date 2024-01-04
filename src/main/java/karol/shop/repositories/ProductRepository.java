@@ -48,7 +48,9 @@ public class ProductRepository implements IProductRepository{
     }
 
     @Override
-    public void deleteReview() {
+    public void deleteReview(Long reviewId) {
+        ReviewDao.deleteById(reviewId);
+    }
 
     }
 
