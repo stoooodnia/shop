@@ -1,13 +1,19 @@
 package karol.shop.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Entity
 public class Product
 {
-    private String productId;
+    @Id
+    @GeneratedValue(generator = "uuid")
+    private Long productId;
     private String modelId;
     private String title;
     private String photoUrl;
@@ -17,7 +23,8 @@ public class Product
     private Integer quantity;
     private String details;
 
-    public Product(String productId, String modelId, String title, String photoUrl, Double price, Double deliveryPrice, String description, Integer quantity, String details) {
+    public Product() {}
+    public Product(Long productId, String modelId, String title, String photoUrl, Double price, Double deliveryPrice, String description, Integer quantity, String details) {
         this.productId = productId;
         this.modelId = modelId;
         this.title = title;

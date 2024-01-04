@@ -10,13 +10,13 @@ import java.util.ArrayList;
 
 @Repository
 public class ProductRepository implements IProductRepository{
-    private IProductDao ProductsDao;
-    private IReviewDao ReviewsDao;
+    private IProductDao ProductDao;
+    private IReviewDao ReviewDao;
 
     @Autowired
     public ProductRepository(IProductDao ProductDao, IReviewDao ReviewDao) {
-        this.ProductsDao = ProductDao;
-        this.ReviewsDao = ReviewDao;
+        this.ProductDao = ProductDao;
+        this.ReviewDao = ReviewDao;
     }
 
     @Override
@@ -26,25 +26,25 @@ public class ProductRepository implements IProductRepository{
 
     @Override
     public void addReview(Review review) {
-        ReviewsDao.save(review);
+        ReviewDao.save(review);
     }
 
     @Override
     public Integer getAverageRatingOf(Long productId) {
         // Stream API
-        return ReviewsDao.findByProductId(productId).stream()
-                .reduce(0, (sum, review) -> sum + review.getRating(), Integer::sum) / ReviewsDao.findByProductId(productId).size();
+        return ReviewDao.findByProductId(productId).stream()
+                .reduce(0, (sum, review) -> sum + review.getRating(), Integer::sum) / ReviewDao.findByProductId(productId).size();
 
     }
 
     @Override
-    public void changeQuantity() {
-
+    public void changeQuantity(Integer quantity, Long productId) {
+        ProductDao.updateQuantity(quantity, productId);
     }
 
     @Override
-    public void addProduct() {
-
+    public void addProduct(Product product ) {
+        ProductDao.add(product);
     }
 
     @Override

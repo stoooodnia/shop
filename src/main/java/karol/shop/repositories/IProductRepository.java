@@ -9,12 +9,11 @@ public interface IProductRepository {
     ArrayList<Product> getAll(); // zwraca wszystkie produkty
     void addReview(Review review); // dodaje recenzje do produktu
     Integer getAverageRatingOf(Long productId); // zwraca srednia ocen produktu
-    void changeQuantity(); // zmienia ilosc produktu
+    void changeQuantity(Integer quantity, Long productId); // zmienia ilosc produktu
     // admin
-    void addProduct(); // dodaje produkt
-    void deleteReview(); // usuwa recenzje
-    void editReview(); // edytuje recenzje
-    void editComment(); // edytuje komentarz
+    void addProduct(Product product); // dodaje produkt
+    void deleteReview(Long reviewId); // usuwa recenzje
+    void editReview(Long reviewId, Review review); // edytuje recenzje czyli te komentarz
 
 
 
