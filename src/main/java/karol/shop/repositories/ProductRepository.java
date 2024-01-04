@@ -44,7 +44,7 @@ public class ProductRepository implements IProductRepository{
 
     @Override
     public void addProduct(Product product ) {
-        ProductDao.add(product);
+        ProductDao.save(product);
     }
 
     @Override

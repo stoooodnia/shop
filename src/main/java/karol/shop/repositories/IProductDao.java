@@ -1,14 +1,9 @@
 package karol.shop.repositories;
 
 import karol.shop.models.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface IProductDao {
-
-        Product get(Long productId);
-        void add(Product product);
-        void delete(String productId);
-        void update(Product product);
-
+public interface IProductDao extends JpaRepository<Product, Long> {
         void updateQuantity(Integer quantity, Long productId);
 
 }
