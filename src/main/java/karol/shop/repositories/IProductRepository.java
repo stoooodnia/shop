@@ -14,7 +14,7 @@ public interface IProductRepository {
     void addProduct(Product product); // dodaje produkt
     void deleteReview(Long reviewId); // usuwa recenzje
     void editReview(Review review); // edytuje recenzje czyli te komentarz
-
+    Product getProductById(Long productId); // zwraca produkt o podanym id
 
 
 

@@ -4,8 +4,8 @@
 >
 <head>
   <meta charset="UTF-8">
-  <title>All persons</title>
-  <link rel="stylesheet"  th:href="@{/style.css}"/>
+  <title>Shop</title>
+  <link rel="stylesheet"  th:href="@{/css/style.css}"/>
 </head>
 <body>
 
@@ -25,9 +25,9 @@
     <div th:text="${product.photo}"></div>
     <div th:text="${product.price}"></div>
     <div th:text="${product.deliveryPrice}"></div>
-    <a class="details" th:href="@{/furniture/{id}(id=${1})}">Details</a>
-    <a class="delete" th:href="@{/furniture/delete/{id}(id=${2})}">Delete</a>
-    <a class="edit" th:href="@{/furniture/edit/{id}(id=${3})}">Edit</a>
+    <a class="details" th:href="@{/products/{id}(id=${product.productId})}">Details</a>
+    <a class="delete" th:href="@{/products/delete/{id}(id=${product.productId})}">Delete</a>
+    <a class="edit" th:href="@{/products/edit/{id}(id=${product.productId})}">Edit</a>
   </div>
 </div>
 <a class="button" th:href="@{/furniture/form}">Add new furniture</a>

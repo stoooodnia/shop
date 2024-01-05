@@ -49,6 +49,11 @@ public class ProductRepository implements IProductRepository{
     }
 
     @Override
+    public Product getProductById(Long productId) {
+        return ProductDao.findById(productId).get(); // get wyrzuca wyjątek jak nie znajdzie;
+    }
+
+    @Override
     public void deleteReview(Long reviewId) {
         ReviewDao.deleteById(reviewId);
     }
