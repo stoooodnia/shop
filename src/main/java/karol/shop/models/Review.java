@@ -13,17 +13,17 @@ public class Review {
 
     @Id
     @GeneratedValue(generator = "uuid")
-    private Long reviewid;
-    private Long productid;
+    private Long reviewId;
+    private Long productId;
     private String author;
     private String date;
     private Integer rating; // 1 to 5 stars
     private String content;
 
     public Review() {}
-    public Review(Long reviewid, Long productid, String author, String date, Integer rating, String content) {
-        this.reviewid = reviewid;
-        this.productid = productid;
+    public Review(Long reviewId, Long productId, String author, String date, Integer rating, String content) {
+        this.reviewId = reviewId;
+        this.productId = productId;
         this.author = author;
         this.date = date;
         this.rating = rating;

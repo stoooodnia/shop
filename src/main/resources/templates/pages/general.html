@@ -22,12 +22,12 @@
 <div class="all-furniture-container">
   <div class="furniture" th:each="product : ${allProducts}">
     <div th:text="${product.title}"></div>
-    <div th:text="${product.photoUrl}"></div>
-    <div th:text="${furniture.price}"></div>
-    <div th:text="${furniture.deliveryPrice}"></div>
-    <a class="details" th:href="@{/furniture/{id}(id=${furniture.getId()})}">Details</a>
-    <a class="delete" th:href="@{/furniture/delete/{id}(id=${furniture.getId()})}">Delete</a>
-    <a class="edit" th:href="@{/furniture/edit/{id}(id=${furniture.getId()})}">Edit</a>
+    <div th:text="${product.photo}"></div>
+    <div th:text="${product.price}"></div>
+    <div th:text="${product.deliveryPrice}"></div>
+    <a class="details" th:href="@{/furniture/{id}(id=${1})}">Details</a>
+    <a class="delete" th:href="@{/furniture/delete/{id}(id=${2})}">Delete</a>
+    <a class="edit" th:href="@{/furniture/edit/{id}(id=${3})}">Edit</a>
   </div>
 </div>
 <a class="button" th:href="@{/furniture/form}">Add new furniture</a>

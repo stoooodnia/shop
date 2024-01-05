@@ -14,24 +14,24 @@ public class Product
 {
     @Id
     @GeneratedValue(generator = "uuid")
-    private Long productid;
-    private String modelid;
+    private Long productId;
+    private String modelId;
     private String title;
-    private String photourl;
+    private String photo;
     private Double price;
-    private Double deliveryprice;
+    private Double deliveryPrice;
     private String description;
     private Integer quantity;
     private String details;
 
     public Product() {}
     public Product(Long productId, String modelId, String title, String photoUrl, Double price, Double deliveryPrice, String description, Integer quantity, String details) {
-        this.productid = productId;
-        this.modelid = modelId;
+        this.productId = productId;
+        this.modelId = modelId;
         this.title = title;
-        this.photourl = photoUrl;
+        this.photo = photoUrl;
         this.price = price;
-        this.deliveryprice = deliveryPrice;
+        this.deliveryPrice = deliveryPrice;
         this.description = description;
         this.quantity = quantity;
         this.details = details;

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class ProductRepository implements IProductRepository{
@@ -21,7 +22,7 @@ public class ProductRepository implements IProductRepository{
 
     @Override
     public ArrayList<Product> getAll() {
-        return null;
+        return (ArrayList<Product>) ProductDao.findAll();
     }
 
     @Override
@@ -32,8 +33,8 @@ public class ProductRepository implements IProductRepository{
     @Override
     public Integer getAverageRatingOf(Long productId) {
         // Stream API
-        return ReviewDao.findByProductid(productId).stream()
-                .reduce(0, (sum, review) -> sum + review.getRating(), Integer::sum) / ReviewDao.findByProductid(productId).size();
+        return ReviewDao.findByProductId(productId).stream()
+                .reduce(0, (sum, review) -> sum + review.getRating(), Integer::sum) / ReviewDao.findByProductId(productId).size();
 
     }
 
