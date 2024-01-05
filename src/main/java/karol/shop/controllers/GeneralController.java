@@ -24,7 +24,7 @@ public class GeneralController {
     @GetMapping("/products/{id}")
     public String furnitureDetail(Model model, @PathVariable("id") String id){
         System.out.println("iddd  " + id);
-        Long productId = Long.parseLong(id);
+        long productId = Long.parseLong(id);
         model.addAttribute("product", ProductRepository.getProductById(productId));
         return "pages/product-details";
     }

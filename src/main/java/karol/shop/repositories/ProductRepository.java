@@ -31,7 +31,7 @@ public class ProductRepository implements IProductRepository{
     }
 
     @Override
-    public Integer getAverageRatingOf(Long productId) {
+    public int getAverageRatingOf(long productId) {
         // Stream API
         return ReviewDao.findByProductId(productId).stream()
                 .reduce(0, (sum, review) -> sum + review.getRating(), Integer::sum) / ReviewDao.findByProductId(productId).size();
@@ -39,7 +39,7 @@ public class ProductRepository implements IProductRepository{
     }
 
     @Override
-    public void changeQuantity(Integer quantity, Long productId) {
+    public void changeQuantity(int quantity, long productId) {
         ProductDao.updateQuantity(quantity, productId);
     }
 
@@ -49,12 +49,12 @@ public class ProductRepository implements IProductRepository{
     }
 
     @Override
-    public Product getProductById(Long productId) {
+    public Product getProductById(long productId) {
         return ProductDao.findById(productId).get(); // get wyrzuca wyjątek jak nie znajdzie;
     }
 
     @Override
-    public void deleteReview(Long reviewId) {
+    public void deleteReview(long reviewId) {
         ReviewDao.deleteById(reviewId);
     }
 
