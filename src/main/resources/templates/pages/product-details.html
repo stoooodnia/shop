@@ -9,11 +9,20 @@
 <body>
 
 
-<h1>Add furniture</h1>
+<h1>Product Details</h1>
 
 <div class="container" th:object="${product}">
     <div th:text="${product.title}"></div>
-    <div th:text="${product.productId}"></div>
+    <img th:src="${product.photoUrl}" th:alt="${product.title}">
+    <div th:text="${'Price: ' + product.price + '$'}"></div>
+    <div th:text="${'Delivery price: ' + product.deliveryPrice + '$'}"></div>
+    <div th:text="${'Quantity: ' + product.quantity}"></div>
+    <div> Description: </div>
+    <div th:text="${product.description}"></div>
+    <div> Average rating: </div>
+    <span th:each="star : ${#numbers.sequence(1, product.averageRating)}">⭐</span>
+    <div th:text="${product.details}"></div>
+
     <a th:href="@{/general}">Go back to homepage</a>
 </div>
 </body>

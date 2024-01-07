@@ -19,9 +19,6 @@ public interface IProductRepository {
 
 
 
-
-
-
     // po rozwinięciu szczegółów mamy dwie kategorie, szczegóły produktu - np. dostawy i opinie.
     // aplikacja powinna umozliwiac pokazanie modeli produktów jakie mamy na stanie
 }

@@ -22,7 +22,10 @@ public class ProductRepository implements IProductRepository{
 
     @Override
     public ArrayList<Product> getAll() {
-        return (ArrayList<Product>) ProductDao.findAll();
+        ArrayList<Product> products = (ArrayList<Product>) ProductDao.findAll();
+        products.forEach(product -> product.setAverageRating(this.getAverageRatingOf(product.getProductId())));
+        return products;
+        //TODO : Przy dodawaniu opinii średnia opinia się zaktualizuje więc nie trzeba jej będzie ciągle dodawać do modelu
     }
 
     @Override

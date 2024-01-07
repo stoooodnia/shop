@@ -18,13 +18,14 @@ public class GeneralController {
     @GetMapping("/general")
     public String shop(Model model) {
         model.addAttribute("allProducts", ProductRepository.getAll());
+
         return "pages/general";
     }
 
     @GetMapping("/products/{id}")
     public String furnitureDetail(Model model, @PathVariable("id") String id){
-        System.out.println("iddd  " + id);
         long productId = Long.parseLong(id);
+        System.out.println("gwiazdki: " + ProductRepository.getProductById(productId).getAverageRating());
         model.addAttribute("product", ProductRepository.getProductById(productId));
         return "pages/product-details";
     }
