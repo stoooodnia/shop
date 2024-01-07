@@ -20,10 +20,17 @@
     <div> Description: </div>
     <div th:text="${product.description}"></div>
     <div> Average rating: </div>
-    <span th:each="star : ${#numbers.sequence(1, product.averageRating)}">⭐</span>
+    <th:block th:if="${product.averageRating == 0}">
+        <p>No reviews yet</p>
+        <a class="button" th:href="@{'/products/' + ${product.productId} + '/reviews/add'}">Add review</a>
+    </th:block>
+    <th:block th:if="${product.averageRating > 0}">
+        <span th:each="star : ${#numbers.sequence(1, product.averageRating)}">⭐</span>
+        <a class="reviews" th:href="@{'/products/' + ${product.productId} + '/reviews'}">Reviews</a>
+    </th:block>
     <div th:text="${product.details}"></div>
 
-    <a th:href="@{/general}">Go back to homepage</a>
+    <a th:href="@{/}">Go back to homepage</a>
 </div>
 </body>
 </html>

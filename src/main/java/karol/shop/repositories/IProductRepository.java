@@ -8,15 +8,15 @@ import java.util.ArrayList;
 public interface IProductRepository {
     ArrayList<Product> getAll(); // zwraca wszystkie produkty
     void addReview(Review review); // dodaje recenzje do produktu
-    int getAverageRatingOf(long productId); // zwraca srednia ocen produktu
-    void changeQuantity(int quantity, long productId); // zmienia ilosc produktu
+    int getAverageRatingOf(long product_id); // zwraca srednia ocen produktu
+    void changeQuantity(int quantity, long product_id); // zmienia ilosc produktu
     // admin
     void addProduct(Product product); // dodaje produkt
-    void deleteReview(long reviewId); // usuwa recenzje
+    void deleteReview(long review_id); // usuwa recenzje
     void editReview(Review review); // edytuje recenzje czyli te komentarz
-    Product getProductById(long productId); // zwraca produkt o podanym id
+    Product getProductById(long product_id); // zwraca produkt o podanym id
 
-    ArrayList<Review> getReviewsOf(long productId); // zwraca wszystkie recenzje produktu
+    ArrayList<Review> getReviewsOf(long product_id); // zwraca wszystkie recenzje produktu
 
 
 

@@ -23,7 +23,7 @@ public class ProductRepository implements IProductRepository{
     @Override
     public ArrayList<Product> getAll() {
         ArrayList<Product> products = (ArrayList<Product>) ProductDao.findAll();
-        products.forEach(product -> product.setAverageRating(this.getAverageRatingOf(product.getProductId())));
+//        products.forEach(product -> product.setAverageRating(this.getAverageRatingOf(product.getProductId())));
         return products;
         //TODO : Przy dodawaniu opinii średnia opinia się zaktualizuje więc nie trzeba jej będzie ciągle dodawać do modelu
     }
@@ -34,16 +34,16 @@ public class ProductRepository implements IProductRepository{
     }
 
     @Override
-    public int getAverageRatingOf(long productId) {
+    public int getAverageRatingOf(long product_id) {
         // Stream API
-        return ReviewDao.findByProductId(productId).stream()
-                .reduce(0, (sum, review) -> sum + review.getRating(), Integer::sum) / ReviewDao.findByProductId(productId).size();
+        return ReviewDao.findByProductId(product_id).stream()
+                .reduce(0, (sum, review) -> sum + review.getRating(), Integer::sum) / (ReviewDao.findByProductId(product_id).size());
 
     }
 
     @Override
-    public void changeQuantity(int quantity, long productId) {
-        ProductDao.updateQuantity(quantity, productId);
+    public void changeQuantity(int quantity, long product_id) {
+        ProductDao.updateQuantity(quantity, product_id);
     }
 
     @Override
@@ -52,13 +52,13 @@ public class ProductRepository implements IProductRepository{
     }
 
     @Override
-    public Product getProductById(long productId) {
-        return ProductDao.findById(productId).get(); // get wyrzuca wyjątek jak nie znajdzie;
+    public Product getProductById(long product_id) {
+        return ProductDao.findById(product_id).orElse(null);
     }
 
     @Override
-    public void deleteReview(long reviewId) {
-        ReviewDao.deleteById(reviewId);
+    public void deleteReview(long review_id) {
+        ReviewDao.deleteById(review_id);
     }
 
     @Override
@@ -67,8 +67,15 @@ public class ProductRepository implements IProductRepository{
     }
 
     @Override
-    public ArrayList<Review> getReviewsOf(long productId) {
-        return ReviewDao.findByProductId(productId);
+    public ArrayList<Review> getReviewsOf(long product_id) {
+        System.out.println("product id: " + product_id);
+        return ReviewDao.findByProductId(product_id);
+    }
+
+    public void updateAverageRating(long product_id) {
+        Product product = getProductById(product_id);
+        product.setAverageRating(getAverageRatingOf(product_id));
+        ProductDao.save(product);
     }
 
 

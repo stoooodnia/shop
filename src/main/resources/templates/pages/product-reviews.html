@@ -8,13 +8,18 @@
     <link rel="stylesheet"  th:href="@{/css/style.css}"/>
 </head>
 <body>
-
-<div class="all-products-container" >
-    <div th:each="product : ${allProducts}">
-        <div th:replace="~{fragments/productCard :: productCard(product=${product})}"></div>
-    </div>
+<div class="reviews-product">
+    <div th:replace="~{fragments/productCard :: productCard(product=${product})}"></div>
 </div>
-<a class="button" th:href="@{/furniture/form}">Add new furniture</a>
+<h1>Product reviews</h1>
+<a class="button" th:href="@{'/products/' + ${product.productId} + '/reviews/add'}">Add review</a>
+<!--TODO: add review add form-->
+<div class="product-reviews-container" >
+    <div th:each="review : ${AllReviews}">
+        <div th:replace="~{fragments/reviewCard :: reviewCard(review=${review})}"></div>
+    </div>
+    <a th:href="@{/}">Go back to homepage</a>
+</div>
 
 </body>
 </html>

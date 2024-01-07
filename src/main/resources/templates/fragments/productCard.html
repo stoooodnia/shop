@@ -14,7 +14,14 @@
     <div> Description: </div>
     <div th:text="${product.description}"></div>
     <div> Average rating: </div>
-    <span th:each="star : ${#numbers.sequence(1, product.averageRating)}">⭐</span>
+    <th:block th:if="${product.averageRating == 0}">
+      <p>No reviews yet</p>
+      <a class="button" th:href="@{'/products/' + ${product.productId} + '/reviews/add'}">Add review</a>
+    </th:block>
+    <th:block th:if="${product.averageRating > 0}">
+      <span th:each="star : ${#numbers.sequence(1, product.averageRating)}">⭐</span>
+      <a class="reviews" th:href="@{'/products/' + ${product.productId} + '/reviews'}">Reviews</a>
+    </th:block>
     <a class="details" th:href="@{/products/{id}(id=${product.productId})}">Details</a>
     <a class="delete" th:href="@{/products/delete/{id}(id=${product.productId})}">Delete</a>
     <a class="edit" th:href="@{/products/edit/{id}(id=${product.productId})}">Edit</a>

@@ -12,7 +12,7 @@ import lombok.Setter;
 public class Review {
 
     @Id
-    @GeneratedValue(generator = "uuid")
+    @GeneratedValue(generator = "increment")
     private long reviewId;
     private long productId;
     private String author;
@@ -21,8 +21,7 @@ public class Review {
     private String content;
 
     public Review() {}
-    public Review(long reviewId, long productId, String author, String date, int rating, String content) {
-        this.reviewId = reviewId;
+    public Review(long productId, String author, String date, int rating, String content) {
         this.productId = productId;
         this.author = author;
         this.date = date;
