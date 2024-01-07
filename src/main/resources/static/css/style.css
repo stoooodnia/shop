@@ -94,6 +94,10 @@ color: brown;
     box-shadow: 0px 0px 1px 0px GREY;
 
 }
+.product>img{
+    max-height: 50px;
+    max-width: 50px;
+}
 .button{
 border-radius: 10px;
 border: none;
