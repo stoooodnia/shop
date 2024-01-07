@@ -66,5 +66,10 @@ public class ProductRepository implements IProductRepository{
         ReviewDao.save(review); // TODO: to dziala przekornie, sprawdzic czy dziala
     }
 
+    @Override
+    public ArrayList<Review> getReviewsOf(long productId) {
+        return ReviewDao.findByProductId(productId);
+    }
+
 
 }

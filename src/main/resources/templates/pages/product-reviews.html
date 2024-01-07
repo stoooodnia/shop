@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Shop</title>
+    <link rel="stylesheet"  th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<div class="all-products-container" >
+    <div th:each="product : ${allProducts}">
+        <div th:replace="~{fragments/productCard :: productCard(product=${product})}"></div>
+    </div>
+</div>
+<a class="button" th:href="@{/furniture/form}">Add new furniture</a>
+
+</body>
+</html>

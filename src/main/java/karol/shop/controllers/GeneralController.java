@@ -23,10 +23,18 @@ public class GeneralController {
     }
 
     @GetMapping("/products/{id}")
-    public String furnitureDetail(Model model, @PathVariable("id") String id){
+    public String productDetail(Model model, @PathVariable("id") String id){
         long productId = Long.parseLong(id);
         System.out.println("gwiazdki: " + ProductRepository.getProductById(productId).getAverageRating());
         model.addAttribute("product", ProductRepository.getProductById(productId));
         return "pages/product-details";
+    }
+
+    @GetMapping("/products/{id}/reviews")
+    public String productReviews(Model model, @PathVariable("id") String id){
+        long productId = Long.parseLong(id);
+        model.addAttribute("product", ProductRepository.getProductById(productId));
+        model.addAttribute("reviews", ProductRepository.getRe
+        return "pages/product-reviews";
     }
 }

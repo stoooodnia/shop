@@ -16,6 +16,8 @@ public interface IProductRepository {
     void editReview(Review review); // edytuje recenzje czyli te komentarz
     Product getProductById(long productId); // zwraca produkt o podanym id
 
+    ArrayList<Review> getReviewsOf(long productId); // zwraca wszystkie recenzje produktu
+
 
 
 
