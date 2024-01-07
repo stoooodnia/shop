@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headerfiles">
+  <meta charset="UTF-8" />
+  <link th:href="@{/css/styles.css}" rel="stylesheet">
+</head>
+<body>
+  <div class="product" th:fragment="productCard (product)">
+    <div th:text="${product.title}"></div>
+    <div th:text="${product.photo}"></div>
+    <div th:text="${product.price}"></div>
+    <div th:text="${product.deliveryPrice}"></div>
+    <a class="details" th:href="@{/products/{id}(id=${product.productId})}">Details</a>
+    <a class="delete" th:href="@{/products/delete/{id}(id=${product.productId})}">Delete</a>
+    <a class="edit" th:href="@{/products/edit/{id}(id=${product.productId})}">Edit</a>
+  </div>
+</body>
+</html>

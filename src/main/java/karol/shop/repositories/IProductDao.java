@@ -10,4 +10,5 @@ public interface IProductDao extends JpaRepository<Product, Long> {
         @Query("UPDATE Product p SET p.quantity = :quantity WHERE p.productId = :productId")
         void updateQuantity(int quantity, long productId);
 
+
 }

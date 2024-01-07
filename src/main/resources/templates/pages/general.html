@@ -13,21 +13,15 @@
   <div th:text="${successMessage}" />
 </div>
 
-<h1>All furniture</h1>
+<h1>Shop</h1>
 
 <div th:if="${errorMessage}">
   <p th:text="${errorMessage}" ></p>
 </div>
 
-<div class="all-furniture-container">
-  <div class="furniture" th:each="product : ${allProducts}">
-    <div th:text="${product.title}"></div>
-    <div th:text="${product.photo}"></div>
-    <div th:text="${product.price}"></div>
-    <div th:text="${product.deliveryPrice}"></div>
-    <a class="details" th:href="@{/products/{id}(id=${product.productId})}">Details</a>
-    <a class="delete" th:href="@{/products/delete/{id}(id=${product.productId})}">Delete</a>
-    <a class="edit" th:href="@{/products/edit/{id}(id=${product.productId})}">Edit</a>
+<div class="all-products-container" >
+  <div th:each="product : ${allProducts}">
+    <div th:replace="~{fragments/productCard :: productCard(product=${product})}"></div>
   </div>
 </div>
 <a class="button" th:href="@{/furniture/form}">Add new furniture</a>
