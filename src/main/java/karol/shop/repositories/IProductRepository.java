@@ -6,18 +6,17 @@ import karol.shop.models.Review;
 import java.util.ArrayList;
 
 public interface IProductRepository {
-    ArrayList<Product> getAll(); // zwraca wszystkie produkty
+    ArrayList<Product> findAllProducts(); // zwraca wszystkie produkty
     void addReview(Review review); // dodaje recenzje do produktu
-    int getAverageRatingOf(long product_id); // zwraca srednia ocen produktu
+    ArrayList<Review> findReviewsByProductId(long product_id); // zwraca srednia ocen produktu
     void changeQuantity(int quantity, long product_id); // zmienia ilosc produktu
     // admin
     void addProduct(Product product); // dodaje produkt
     void deleteReview(long review_id); // usuwa recenzje
-    void editReview(Review review); // edytuje recenzje czyli te komentarz
+    void editReview(Review review); // edytuje recenzje czyli tez komentarz
     Product getProductById(long product_id); // zwraca produkt o podanym id
-
     ArrayList<Review> getReviewsOf(long product_id); // zwraca wszystkie recenzje produktu
-
+    void updateProduct(Product product); // aktualizuje produkt
 
 
 
