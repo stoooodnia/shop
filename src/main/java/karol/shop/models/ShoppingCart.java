@@ -35,4 +35,14 @@ public class ShoppingCart {
         return totalPrice;
     }
 
+    public boolean contains(Long productid) {
+        return cart.stream().filter(p -> p.getProductId() == productid).findFirst().isPresent();
+    }
+
+    public Product findProduct(long productId) {
+        return cart.stream()
+                .filter(p -> p.getProductId() == productId)
+                .findFirst()
+                .orElse(null);
+    }
 }

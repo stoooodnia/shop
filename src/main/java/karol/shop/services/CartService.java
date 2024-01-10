@@ -27,7 +27,14 @@ public class CartService {
 
     public void addToCart(long productId) {
         Product product = productRepository.getProductById(productId);
-        shoppingCart.addProduct(product);
-        // TODO: change quantity
+        // check if product is already in cart to prevent duplicates
+        if(shoppingCart.contains(productId)) {
+            shoppingCart.findProduct(productId).setQuantity(product.getQuantity() + 1);
+        } else {
+            product.setQuantity(1);
+            shoppingCart.addProduct(product);
+        }
     }
+
+
 }
