@@ -1,9 +1,3 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-  <meta charset="UTF-8" />
-  <link th:href="@{/css/styles.css}" rel="stylesheet">
-</head>
-<body>
 <div class="product" th:fragment="productCard (product)">
   <div th:text="${product.getTitle()}"></div>
   <img th:src="${product.getPhotoUrl()}" th:alt="${product.getTitle()}">
@@ -25,5 +19,4 @@
   <a class="delete" th:href="@{/products/delete/{id}(id=${product.getProductId()})}">Delete</a>
   <a class="edit" th:href="@{/products/edit/{id}(id=${product.getProductId()})}">Edit</a>
 </div>
-</body>
-</html>
+
