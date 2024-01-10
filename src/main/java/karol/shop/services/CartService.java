@@ -1,9 +1,12 @@
 package karol.shop.services;
 
+import karol.shop.models.Product;
 import karol.shop.models.ShoppingCart;
 import karol.shop.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 @Service
 public class CartService {
@@ -18,4 +21,7 @@ public class CartService {
     }
 
 
+    public ArrayList<Product> getCart() {
+        return shoppingCart.getCart();
+    }
 }

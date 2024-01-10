@@ -25,7 +25,7 @@ public class GeneralController {
     @GetMapping("/")
     public String shop(Model model) {
         model.addAttribute("allProducts", generalService.getAll());
-//        model.addAttribute("cart", cartService.getCart());
+        model.addAttribute("cart", cartService.getCart());
 
         return "pages/general";
     }
