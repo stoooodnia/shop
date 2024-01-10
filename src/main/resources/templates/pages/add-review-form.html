@@ -20,8 +20,8 @@
 </div>
 
 <div class="container">
-  <h2 th:text="${'Add Review for ' + product.title}"></h2>
-  <form th:action="@{'/products/' + ${product.productId} + '/add-review'}" method="post" th:object="${review}">
+  <h2 th:text="${'Add Review for ' + product.getTitle()}"></h2>
+  <form th:action="@{'/products/' + ${product.getProductId()} + '/add-review'}" method="post" th:object="${review}">
     <div class="form-group">
       <label for="author">Author:</label>
       <input type="text" class="form-control" id="author" name="author" th:field="*{author}" required>

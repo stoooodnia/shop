@@ -12,8 +12,7 @@
     <div th:replace="~{fragments/productCard :: productCard(product=${product})}"></div>
 </div>
 <h1>Product reviews</h1>
-<a class="button" th:href="@{'/products/' + ${product.productId} + '/reviews/add'}">Add review</a>
-<!--TODO: add review add form-->
+<a class="button" th:href="@{'/products/' + ${product.getProductId()} + '/reviews/add'}">Add review</a>
 <div class="product-reviews-container" >
     <div th:each="review : ${AllReviews}">
         <div th:replace="~{fragments/reviewCard :: reviewCard(review=${review})}"></div>
