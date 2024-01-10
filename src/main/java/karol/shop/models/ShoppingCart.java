@@ -10,6 +10,7 @@ import java.util.ArrayList;
 @Setter
 public class ShoppingCart {
     private ArrayList<Product> cart;
+
     private double totalPrice;
 
     public ShoppingCart() {

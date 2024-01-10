@@ -54,7 +54,6 @@ public class GeneralController {
             model.addAttribute("review", new Review());
             return "pages/add-review-form";
         } else {
-            // Obsługa przypadku, gdy produkt o danym ID nie istnieje
             return "redirect:/";
         }
     }
@@ -69,7 +68,6 @@ public class GeneralController {
             generalService.updateAverageRating(productId);
             return "redirect:/";
         } else {
-            // Obsługa przypadku, gdy produkt o danym ID nie istnieje
             return "redirect:/";
         }
     }

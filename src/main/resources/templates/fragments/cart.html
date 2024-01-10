@@ -1,15 +1,13 @@
 <div class="cart" th:fragment="cartComponent(cart)">
     <h1>Shopping Cart</h1>
     <div>
-        <h3>Your Cart</h3>
-
         <div th:if="${cart.isEmpty()}">
             <p>Your cart is empty.</p>
         </div>
 
         <div th:if="${not cart.isEmpty()}">
             <div th:each="product : ${cart.getCart()}">
-                <div th:replace="~{fragments/productCard :: productCard(product=${product})}"></div>
+                <div th:replace="~{fragments/cartProductCard :: cartProductCard(product=${product})}"></div>
             </div>
             <p>Total: <span th:text="${'$' + cart.getTotalPrice()}"></span></p>
             <a class="button" th:href="@{/checkout}">Proceed to Checkout</a>

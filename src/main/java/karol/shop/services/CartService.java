@@ -6,7 +6,6 @@ import karol.shop.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 
 @Service
 public class CartService {
@@ -27,12 +26,16 @@ public class CartService {
 
     public void addToCart(long productId) {
         Product product = productRepository.getProductById(productId);
+        // prototype pattern
+        Product newProduct = product.cloneProduct();
+
         // check if product is already in cart to prevent duplicates
         if(shoppingCart.contains(productId)) {
-            shoppingCart.findProduct(productId).setQuantity(product.getQuantity() + 1);
+            Product temp = shoppingCart.findProduct(productId);
+                    temp.setQuantity(temp.getQuantity() + 1);
         } else {
-            product.setQuantity(1);
-            shoppingCart.addProduct(product);
+            newProduct.setQuantity(1);
+            shoppingCart.addProduct(newProduct);
         }
     }
 
