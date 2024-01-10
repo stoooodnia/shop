@@ -2,6 +2,7 @@ package karol.shop.controllers;
 
 import karol.shop.models.Product;
 import karol.shop.models.Review;
+import karol.shop.services.CartService;
 import karol.shop.services.GeneralService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,13 +16,16 @@ import java.time.LocalDate;
 @Controller
 public class GeneralController {
     private final GeneralService generalService;
-    GeneralController(GeneralService generalService) {
+    private final CartService cartService;
+    GeneralController(GeneralService generalService, CartService cartService) {
         this.generalService = generalService;
+        this.cartService = cartService;
     }
 
     @GetMapping("/")
     public String shop(Model model) {
         model.addAttribute("allProducts", generalService.getAll());
+//        model.addAttribute("cart", cartService.getCart());
 
         return "pages/general";
     }
