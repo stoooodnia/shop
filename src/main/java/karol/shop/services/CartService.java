@@ -21,7 +21,13 @@ public class CartService {
     }
 
 
-    public ArrayList<Product> getCart() {
-        return shoppingCart.getCart();
+    public ShoppingCart getCart() {
+        return shoppingCart;
+    }
+
+    public void addToCart(long productId) {
+        Product product = productRepository.getProductById(productId);
+        shoppingCart.addProduct(product);
+        // TODO: change quantity
     }
 }

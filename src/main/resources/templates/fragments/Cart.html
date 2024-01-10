@@ -8,10 +8,10 @@
         </div>
 
         <div th:if="${not cart.isEmpty()}">
-            <div th:each="product : ${cart.getItems()}">
+            <div th:each="product : ${cart.getCart()}">
                 <div th:replace="~{fragments/productCard :: productCard(product=${product})}"></div>
             </div>
-            <p>Total: <span th:text="${'$' + cart.getTotal()}"></span></p>
+            <p>Total: <span th:text="${'$' + cart.getTotalPrice()}"></span></p>
             <a class="button" th:href="@{/checkout}">Proceed to Checkout</a>
         </div>
     </div>

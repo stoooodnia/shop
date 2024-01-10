@@ -31,4 +31,8 @@ public class ShoppingCart {
         return cart.isEmpty();
     }
 
+    public double getTotal() {
+        return totalPrice;
+    }
+
 }
