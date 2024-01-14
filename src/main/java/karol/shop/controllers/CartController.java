@@ -71,7 +71,12 @@ public class CartController {
 
         // Przetwarzanie zamówienia, np. zapis do bazy danych, itp.
 
-        return "redirect:/order-success"; // Przekierowanie po złożeniu zamówienia
+        return "redirect:/cart/order-success"; // Przekierowanie po złożeniu zamówienia
+    }
+
+    @GetMapping("/cart/order-success")
+    public String orderSuccess() {
+        return "pages/order-success";
     }
 
 
