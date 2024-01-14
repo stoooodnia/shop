@@ -25,7 +25,7 @@ public class GeneralController {
     @GetMapping("/")
     public String shop(Model model) {
 
-        String error = (String) model.getAttribute("error");
+        String error = (String) model.getAttribute("errorMessage");
         if (error != null) {
             model.addAttribute("errorMessage", error);
         }

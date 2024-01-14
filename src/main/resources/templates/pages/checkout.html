@@ -3,23 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Checkout</title>
-    <link rel="stylesheet" href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-
-
-<h1>Checkout</h1>
-
-<div th:if="${errorMessage}" class="error-message">
-    <p th:text="${errorMessage}"></p>
-</div>
-
 <div class="left">
     <div th:replace="~{fragments/cart :: cartComponent(cart=${cart})}"></div>
 </div>
 
 <div class="right">
-    <form action="/cart/checkout" method="post" th:object="${deliveryForm}">
+    <h1>Checkout</h1>
+    <form th:action="@{/cart/checkout}" method="post" th:object="${deliveryForm}">
         <div>
             <label for="deliveryMethod">Delivery Method:</label>
             <select id="deliveryMethod" name="deliveryMethod" th:field="*{deliveryMethod}">
@@ -30,15 +23,38 @@
         </div>
 
         <div>
-            <label for="deliveryAddress">Delivery Address:</label>
-            <input type="text" id="deliveryAddress" name="deliveryAddress" th:field="*{deliveryAddress}" />
-            <span th:if="${#fields.hasErrors('deliveryAddress')}" th:errors="*{deliveryAddress}" class="error"></span>
+            <label for="street">Street:</label>
+            <input type="text" id="street" name="street" th:field="*{street}" />
+            <span th:if="${#fields.hasErrors('street')}" th:errors="*{street}" class="error"></span>
+        </div>
+
+        <div>
+            <label for="houseNumber">House Number:</label>
+            <input type="text" id="houseNumber" name="houseNumber" th:field="*{houseNumber}" />
+            <span th:if="${#fields.hasErrors('houseNumber')}" th:errors="*{houseNumber}" class="error"></span>
+        </div>
+
+        <div>
+            <label for="apartmentNumber">Apartment Number:</label>
+            <input type="text" id="apartmentNumber" name="apartmentNumber" th:field="*{apartmentNumber}" />
+            <span th:if="${#fields.hasErrors('apartmentNumber')}" th:errors="*{apartmentNumber}" class="error"></span>
+        </div>
+
+        <div>
+            <label for="postalCode">Postal Code:</label>
+            <input type="text" id="postalCode" name="postalCode" th:field="*{postalCode}" />
+            <span th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}" class="error"></span>
+        </div>
+
+        <div>
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" th:field="*{city}" />
+            <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}" class="error"></span>
         </div>
 
         <button type="submit">Place Order</button>
     </form>
 </div>
-
 
 </body>
 </html>

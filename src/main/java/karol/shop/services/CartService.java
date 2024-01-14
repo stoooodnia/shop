@@ -1,5 +1,6 @@
 package karol.shop.services;
 
+import karol.shop.models.DeliveryForm;
 import karol.shop.models.Product;
 import karol.shop.models.ShoppingCart;
 import karol.shop.repositories.ProductRepository;
@@ -85,5 +86,9 @@ public class CartService {
         shoppingCart.removeProduct(productInCart);
 
         shoppingCart.calculateTotalPriceWithDelivery();
+    }
+
+    public Object getDeliveryForm() {
+        return new DeliveryForm();
     }
 }
