@@ -5,9 +5,10 @@
   <div th:text="${'Delivery price: ' + product.getDeliveryPrice() + '$'}"></div>
   <div th:text="${'Quantity: ' + product.getQuantity()}"></div>
   <form th:action="@{'/cart/update/' + ${product.getProductId()}}" method="post">
-    <input type="number" name="quantity" th:value="${product.getQuantity()}" min="1" required/>
+    <input type="number" name="quantity" th:value="${product.getQuantity()}" min="0" required/>
     <button type="submit">Update Quantity</button>
   </form>
 
+  <a class="delete" th:href="@{/cart/remove/{id}(id=${product.getProductId()})}">Remove from cart</a>
   <a class="details" th:href="@{/products/{id}(id=${product.getProductId()})}">Details</a>
 </div>

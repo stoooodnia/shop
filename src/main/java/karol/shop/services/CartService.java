@@ -36,17 +36,45 @@ public class CartService {
         } else {
             newProduct.setQuantity(1);
             shoppingCart.addProduct(newProduct);
+
+            Product productInStock = productRepository.getProductById(productId);
+            productInStock.setQuantity(productInStock.getQuantity() - 1);
+            productRepository.updateProduct(productInStock);
+
         }
     }
 
     public void updateCart(long productId, int quantity) {
+
+        Product productInCart = shoppingCart.findProduct(productId);
+        Product productInStock = productRepository.getProductById(productId);
         // check if there is enough quantity of product in stock
-        if(quantity > productRepository.getProductById(productId).getQuantity()) {
+        if(quantity > productInStock.getQuantity() + productInCart.getQuantity()) {
             throw new IllegalArgumentException("Not enough quantity of product in stock");
         }
-        shoppingCart.findProduct(productId).setQuantity(quantity);
-        Product productInStock = productRepository.getProductById(productId);
-        productInStock.setQuantity(productInStock.getQuantity() - quantity);
+
+        if (quantity == 0) {
+            shoppingCart.removeProduct(productInCart);
+            productInStock.setQuantity(productInStock.getQuantity() + productInCart.getQuantity());
+            productRepository.updateProduct(productInStock);
+            return;
+        }
+        else if(quantity > productInCart.getQuantity()) {
+            productInStock.setQuantity(productInStock.getQuantity() + (productInCart.getQuantity() - quantity));
+        } else if(quantity < productInCart.getQuantity()) {
+            productInStock.setQuantity(productInStock.getQuantity() - (quantity - productInCart.getQuantity()));
+        } else {
+            return;
+        }
+        productInCart.setQuantity(quantity);
         productRepository.updateProduct(productInStock);
+    }
+
+    public void removeFromCart(long productId) {
+        Product productInCart = shoppingCart.findProduct(productId);
+        Product productInStock = productRepository.getProductById(productId);
+        productInStock.setQuantity(productInStock.getQuantity() + productInCart.getQuantity());
+        productRepository.updateProduct(productInStock);
+        shoppingCart.removeProduct(productInCart);
     }
 }

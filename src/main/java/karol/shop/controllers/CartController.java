@@ -37,7 +37,13 @@ public class CartController {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
             return "redirect:/";
         }
-
     }
+    @GetMapping("/cart/remove/{id}")
+    public String removeFromCart(@PathVariable("id") String id){
+        long productId = Long.parseLong(id);
+        cartService.removeFromCart(productId);
+        return "redirect:/";
+    }
+
 
 }
