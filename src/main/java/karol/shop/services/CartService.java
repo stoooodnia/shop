@@ -45,5 +45,8 @@ public class CartService {
             throw new IllegalArgumentException("Not enough quantity of product in stock");
         }
         shoppingCart.findProduct(productId).setQuantity(quantity);
+        Product productInStock = productRepository.getProductById(productId);
+        productInStock.setQuantity(productInStock.getQuantity() - quantity);
+        productRepository.updateProduct(productInStock);
     }
 }
