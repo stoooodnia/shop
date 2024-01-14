@@ -9,9 +9,10 @@ flex-direction:column;
 font-family: 'Roboto', sans-serif;
 }
 
-p{
+p, .error-message{
 color: red;
 }
+
 .addToCard{
 background-color: orange;
 border: none;

@@ -63,11 +63,10 @@ public class CartController {
     }
 
     @PostMapping("/cart/checkout")
-    public String processCheckout(RedirectAttributes redirectAttributes, @Valid @ModelAttribute("deliveryForm") DeliveryForm deliveryForm, BindingResult result) {
+    public String processCheckout(Model model, @Valid @ModelAttribute("deliveryForm") DeliveryForm deliveryForm, BindingResult result) {
         if (result.hasErrors()) {
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.deliveryForm", result);
-            redirectAttributes.addFlashAttribute("deliveryForm", deliveryForm);
-            return "redirect:/cart/checkout";
+            model.addAttribute("cart", cartService.getCart());
+            return "pages/checkout";
         }
 
         // Przetwarzanie zamówienia, np. zapis do bazy danych, itp.

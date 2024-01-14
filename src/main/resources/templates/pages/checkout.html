@@ -19,37 +19,37 @@
                 <option value="courier">Courier</option>
                 <option value="parcelLocker">Parcel Locker</option>
             </select>
-            <span th:if="${#fields.hasErrors('deliveryMethod')}" th:errors="*{deliveryMethod}" class="error"></span>
+            <span th:if="${#fields.hasErrors('deliveryMethod')}" th:errors="*{deliveryMethod}" class="error-message"></span>
         </div>
 
         <div>
             <label for="street">Street:</label>
             <input type="text" id="street" name="street" th:field="*{street}" />
-            <span th:if="${#fields.hasErrors('street')}" th:errors="*{street}" class="error"></span>
+            <span th:if="${#fields.hasErrors('street')}" th:errors="*{street}" class="error-message"></span>
         </div>
 
         <div>
             <label for="houseNumber">House Number:</label>
             <input type="text" id="houseNumber" name="houseNumber" th:field="*{houseNumber}" />
-            <span th:if="${#fields.hasErrors('houseNumber')}" th:errors="*{houseNumber}" class="error"></span>
+            <span th:if="${#fields.hasErrors('houseNumber')}" th:errors="*{houseNumber}" class="error-message"></span>
         </div>
 
         <div>
             <label for="apartmentNumber">Apartment Number:</label>
             <input type="text" id="apartmentNumber" name="apartmentNumber" th:field="*{apartmentNumber}" />
-            <span th:if="${#fields.hasErrors('apartmentNumber')}" th:errors="*{apartmentNumber}" class="error"></span>
+            <span th:if="${#fields.hasErrors('apartmentNumber')}" th:errors="*{apartmentNumber}" class="error-message"></span>
         </div>
 
         <div>
             <label for="postalCode">Postal Code:</label>
             <input type="text" id="postalCode" name="postalCode" th:field="*{postalCode}" />
-            <span th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}" class="error"></span>
+            <span th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}" class="error-message"></span>
         </div>
 
         <div>
             <label for="city">City:</label>
             <input type="text" id="city" name="city" th:field="*{city}" />
-            <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}" class="error"></span>
+            <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}" class="error-message"></span>
         </div>
 
         <button type="submit">Place Order</button>
