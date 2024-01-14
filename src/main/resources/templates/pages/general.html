@@ -9,6 +9,9 @@
 </head>
 <body>
 <div class="left">
+  <div th:if="${errorMessage}" class="error-message">
+    <p th:text="${errorMessage}"></p>
+  </div>
   <h1>Shop</h1>
   <div class="all-products-container" >
     <div th:each="product : ${allProducts}">

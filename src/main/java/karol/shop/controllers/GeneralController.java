@@ -24,6 +24,12 @@ public class GeneralController {
 
     @GetMapping("/")
     public String shop(Model model) {
+
+        String error = (String) model.getAttribute("error");
+        if (error != null) {
+            model.addAttribute("errorMessage", error);
+        }
+
         model.addAttribute("allProducts", generalService.getAll());
         model.addAttribute("cart", cartService.getCart());
 

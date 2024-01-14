@@ -1,9 +1,13 @@
-<div class="product" th:fragment="cartProductCard (product)">
+<div class="productCart" th:fragment="cartProductCard (product)">
   <div th:text="${product.getTitle()}"></div>
   <img th:src="${product.getPhotoUrl()}" th:alt="${product.getTitle()}">
   <div th:text="${'Price: ' + product.getPrice() + '$'}"></div>
   <div th:text="${'Delivery price: ' + product.getDeliveryPrice() + '$'}"></div>
   <div th:text="${'Quantity: ' + product.getQuantity()}"></div>
+  <form th:action="@{'/cart/update/' + ${product.getProductId()}}" method="post">
+    <input type="number" name="quantity" th:value="${product.getQuantity()}" min="1" required/>
+    <button type="submit">Update Quantity</button>
+  </form>
+
   <a class="details" th:href="@{/products/{id}(id=${product.getProductId()})}">Details</a>
 </div>
-

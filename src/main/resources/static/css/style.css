@@ -103,6 +103,19 @@ color: brown;
     max-height: 50px;
     max-width: 50px;
 }
+
+.productCart {
+    position: relative;
+    background-color: #E5E4E2;
+    padding: 20px;
+    border-radius: 10px;
+    height: 200px;
+    box-shadow: 0px 0px 1px 0px GREY;
+}
+.productCart>img{
+    max-height: 50px;
+    max-width: 50px;
+}
 .button{
 border-radius: 10px;
 border: none;

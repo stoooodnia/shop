@@ -39,5 +39,11 @@ public class CartService {
         }
     }
 
-
+    public void updateCart(long productId, int quantity) {
+        // check if there is enough quantity of product in stock
+        if(quantity > productRepository.getProductById(productId).getQuantity()) {
+            throw new IllegalArgumentException("Not enough quantity of product in stock");
+        }
+        shoppingCart.findProduct(productId).setQuantity(quantity);
+    }
 }
