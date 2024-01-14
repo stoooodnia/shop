@@ -45,5 +45,11 @@ public class CartController {
         return "redirect:/";
     }
 
+    @GetMapping("/cart/checkout")
+    public String checkout(Model model){
+        model.addAttribute("cart", cartService.getCart());
+        return "pages/checkout";
+    }
+
 
 }

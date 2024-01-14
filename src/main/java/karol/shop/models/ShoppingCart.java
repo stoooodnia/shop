@@ -12,6 +12,7 @@ public class ShoppingCart {
     private ArrayList<Product> cart;
 
     private double totalPrice;
+    private double totalPriceWithDelivery;
 
     public ShoppingCart() {
         cart = new ArrayList<>();
@@ -20,20 +21,30 @@ public class ShoppingCart {
 
     public void addProduct(Product product) {
         cart.add(product);
-        totalPrice += product.getPrice();
     }
 
     public void removeProduct(Product product) {
         cart.remove(product);
         totalPrice -= product.getPrice();
     }
+    public void calculateTotalPrice() {
+        double neww = cart.stream()
+                .mapToDouble(product -> product.getPrice() * product.getQuantity())
+                .sum();
+        setTotalPrice(Math.round(neww * 100.0) / 100.0);
+    }
+    public void calculateTotalPriceWithDelivery() {
+        double neww = cart.stream()
+                .mapToDouble(product -> (product.getPrice() + product.getDeliveryPrice()) * product.getQuantity())
+                .sum();
+
+        System.out.println("neww: " + neww);
+        setTotalPriceWithDelivery(Math.round(neww * 100.0) / 100.0);
+
+    }
 
     public boolean isEmpty() {
         return cart.isEmpty();
-    }
-
-    public double getTotal() {
-        return totalPrice;
     }
 
     public boolean contains(Long productid) {

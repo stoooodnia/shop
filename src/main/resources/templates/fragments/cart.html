@@ -10,6 +10,7 @@
                 <div th:replace="~{fragments/cartProductCard :: cartProductCard(product=${product})}"></div>
             </div>
             <p>Total: <span th:text="${'$' + cart.getTotalPrice()}"></span></p>
+            <p>Total with delivery: <span th:text="${'$' + cart.getTotalPriceWithDelivery()}"></span></p>
             <a class="button" th:href="@{/checkout}">Proceed to Checkout</a>
         </div>
     </div>

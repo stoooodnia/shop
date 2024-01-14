@@ -32,6 +32,7 @@ public class GeneralController {
 
         model.addAttribute("allProducts", generalService.getAll());
         model.addAttribute("cart", cartService.getCart());
+        System.out.println("cart price: " + cartService.getCart().getTotalPrice());
 
         return "pages/general";
     }

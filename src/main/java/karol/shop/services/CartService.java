@@ -36,12 +36,14 @@ public class CartService {
         } else {
             newProduct.setQuantity(1);
             shoppingCart.addProduct(newProduct);
-
-            Product productInStock = productRepository.getProductById(productId);
-            productInStock.setQuantity(productInStock.getQuantity() - 1);
-            productRepository.updateProduct(productInStock);
-
         }
+
+        Product productInStock = productRepository.getProductById(productId);
+        productInStock.setQuantity(productInStock.getQuantity() - 1);
+        productRepository.updateProduct(productInStock);
+
+        shoppingCart.calculateTotalPrice();
+        shoppingCart.calculateTotalPriceWithDelivery();
     }
 
     public void updateCart(long productId, int quantity) {
@@ -68,6 +70,11 @@ public class CartService {
         }
         productInCart.setQuantity(quantity);
         productRepository.updateProduct(productInStock);
+
+        System.out.println("add1  "+ shoppingCart.getTotalPrice());
+        shoppingCart.calculateTotalPrice();
+        shoppingCart.calculateTotalPriceWithDelivery();
+        System.out.println("add2  "+ shoppingCart.getTotalPrice());
     }
 
     public void removeFromCart(long productId) {
@@ -76,5 +83,7 @@ public class CartService {
         productInStock.setQuantity(productInStock.getQuantity() + productInCart.getQuantity());
         productRepository.updateProduct(productInStock);
         shoppingCart.removeProduct(productInCart);
+
+        shoppingCart.calculateTotalPriceWithDelivery();
     }
 }
