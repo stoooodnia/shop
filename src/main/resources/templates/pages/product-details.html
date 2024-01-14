@@ -28,7 +28,7 @@
         <a class="reviews" th:href="@{'/products/' + ${product.getProductId()} + '/reviews'}">Reviews</a>
     </th:block>
     <div th:text="${product.getDetails()}"></div>
-
+    <a class="addToCard" th:href="@{/cart/add/{id}(id=${product.getProductId()})}">Add to cart</a>
     <a th:href="@{/}">Go back to homepage</a>
 </div>
 </body>
