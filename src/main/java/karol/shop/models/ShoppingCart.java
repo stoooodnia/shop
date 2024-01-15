@@ -14,6 +14,8 @@ public class ShoppingCart {
     private double totalPrice;
     private double totalPriceWithDelivery;
 
+    private byte[] summaryPdf;
+
     public ShoppingCart() {
         cart = new ArrayList<>();
         totalPrice = 0;

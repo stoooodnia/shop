@@ -91,4 +91,18 @@ public class CartService {
     public Object getDeliveryForm() {
         return new DeliveryForm();
     }
+
+    public void setSummaryPdf(byte[] summaryPdf) {
+        shoppingCart.setSummaryPdf(summaryPdf);
+    }
+
+    public byte[] getSummaryPdf() {
+        return shoppingCart.getSummaryPdf();
+    }
+
+    public void clearCart() {
+        shoppingCart.getCart().clear();
+        shoppingCart.setTotalPrice(0);
+        shoppingCart.setTotalPriceWithDelivery(0);
+    }
 }

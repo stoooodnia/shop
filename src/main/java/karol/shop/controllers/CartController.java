@@ -81,7 +81,7 @@ public class CartController {
             );
 
             redirectAttributes.addFlashAttribute("orderSummaryPdf", pdfBytes);
-            return "redirect:/cart/download-summary";
+            return "redirect:/cart/order-success";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Error during PDF generation: " + e.getMessage());
             return "redirect:/cart/checkout";
@@ -89,14 +89,22 @@ public class CartController {
     }
 
     @GetMapping("/cart/order-success")
-    public String orderSuccess() {
+    public String orderSuccess(Model model) {
+        byte[] pdfBytes = (byte[]) model.getAttribute("orderSummaryPdf");
+        if (pdfBytes != null) {
+         System.out.println("PDF istnieje");
+        }
+
+        cartService.setSummaryPdf(pdfBytes);
+        cartService.clearCart();
+
         return "pages/order-success";
     }
 
     @GetMapping("/cart/download-summary")
     public ResponseEntity<byte[]> downloadOrderSummaryPdf(Model model) {
         // Odczytaj plik PDF z modelu
-        byte[] pdfBytes = (byte[]) model.getAttribute("orderSummaryPdf");
+        byte[] pdfBytes = cartService.getSummaryPdf();
 
         if (pdfBytes != null) {
             // Utwórz nagłówki dla odpowiedzi HTTP
