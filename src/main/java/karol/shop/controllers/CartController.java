@@ -76,6 +76,7 @@ public class CartController {
             byte[] pdfBytes = orderSummaryPdfGenerator.generateOrderSummary(
                     cartService.getCart().getCart(),
                     cartService.getCart().getTotalPrice(),
+                    cartService.getCart().getTotalPriceWithDelivery(),
                     deliveryForm
             );
 
