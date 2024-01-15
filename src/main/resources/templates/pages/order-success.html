@@ -11,6 +11,7 @@
 
 <p>Thank you for your order! Your items will be shipped shortly.</p>
 
+<a th:if="${orderSummaryPdf}" th:href="@{/cart/download-summary}" target="_blank">Download Order Summary</a>
 <a th:href="@{/}" class="button">Back to Homepage</a>
 
 </body>

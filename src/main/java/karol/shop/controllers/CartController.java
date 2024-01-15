@@ -5,6 +5,8 @@ import jakarta.validation.Valid;
 import karol.shop.models.DeliveryForm;
 import karol.shop.services.CartService;
 import karol.shop.services.GeneralService;
+import karol.shop.services.OrderSummaryPdfGenerator;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,9 +20,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class CartController {
     private final GeneralService generalService;
     private final CartService cartService;
-    CartController(GeneralService generalService, CartService cartService) {
+    private final OrderSummaryPdfGenerator orderSummaryPdfGenerator;
+    CartController(GeneralService generalService, CartService cartService, OrderSummaryPdfGenerator orderSummaryPdfGenerator) {
         this.generalService = generalService;
         this.cartService = cartService;
+        this.orderSummaryPdfGenerator = new OrderSummaryPdfGenerator();
     }
 
     @GetMapping("/cart/add/{id}")
@@ -63,15 +67,24 @@ public class CartController {
     }
 
     @PostMapping("/cart/checkout")
-    public String processCheckout(Model model, @Valid @ModelAttribute("deliveryForm") DeliveryForm deliveryForm, BindingResult result) {
+    public String processCheckout(RedirectAttributes redirectAttributes, Model model, @Valid @ModelAttribute("deliveryForm") DeliveryForm deliveryForm, BindingResult result) {
         if (result.hasErrors()) {
             model.addAttribute("cart", cartService.getCart());
             return "pages/checkout";
         }
+        try {
+            byte[] pdfBytes = orderSummaryPdfGenerator.generateOrderSummary(
+                    cartService.getCart().getCart(),
+                    cartService.getCart().getTotalPrice(),
+                    deliveryForm
+            );
 
-        // Przetwarzanie zamówienia, np. zapis do bazy danych, itp.
-
-        return "redirect:/cart/order-success"; // Przekierowanie po złożeniu zamówienia
+            redirectAttributes.addFlashAttribute("orderSummaryPdf", pdfBytes);
+            return "redirect:/cart/download-summary";
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Error during PDF generation: " + e.getMessage());
+            return "redirect:/cart/checkout";
+        }
     }
 
     @GetMapping("/cart/order-success")
@@ -79,6 +92,28 @@ public class CartController {
         return "pages/order-success";
     }
 
+    @GetMapping("/cart/download-summary")
+    public ResponseEntity<byte[]> downloadOrderSummaryPdf(Model model) {
+        // Odczytaj plik PDF z modelu
+        byte[] pdfBytes = (byte[]) model.getAttribute("orderSummaryPdf");
 
+        if (pdfBytes != null) {
+            // Utwórz nagłówki dla odpowiedzi HTTP
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDisposition(ContentDisposition.builder("inline").filename("order-summary.pdf").build());
 
+            // Zwróć odpowiedź z plikiem PDF
+            return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
+        } else {
+            System.out.println("PDF nie istnieje");
+            // Jeśli plik PDF nie istnieje, zwróć odpowiedź z błędem
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }
+
+
+
+
+
