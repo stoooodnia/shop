@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Shop</title>
+    <link rel="stylesheet"  th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="reviews-product">
+    <div th:replace="~{fragments/productCard :: productCard(product=${product})}"></div>
+</div>
+<h1>Product reviews</h1>
+<a class="button" th:href="@{'/admin/products/' + ${product.getProductId()} + '/reviews/add'}">Add review</a>
+<div class="product-reviews-container" >
+    <div th:each="review : ${AllReviews}">
+        <div th:replace="~{fragments/admin/admin-reviewCard :: reviewCard(review=${review})}"></div>
+    </div>
+    <a href="/admin">Go back to homepage</a>
+</div>
+
+</body>
+</html>

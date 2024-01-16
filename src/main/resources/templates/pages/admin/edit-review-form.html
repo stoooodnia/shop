@@ -17,7 +17,7 @@
 
 <div class="container">
     <h2 th:text="${'Edit review for ' + product.getTitle()}"></h2>
-    <form th:action="@{'/products/' + ${product.getProductId()} + '/reviews/edit/' + ${reviewId}}" method="post" th:object="${review}">
+    <form th:action="@{'/admin/products/' + ${product.getProductId()} + '/reviews/edit/' + ${reviewId}}" method="post" th:object="${review}">
         <div class="form-group">
             <label for="author">Author:</label>
             <input type="text" class="form-control" id="author" name="author" th:field="*{author}" required>
@@ -32,6 +32,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Edit Review</button>
     </form>
+    <a href="/admin" class="button">Back to Homepage</a>
 </div>
 
 </body>

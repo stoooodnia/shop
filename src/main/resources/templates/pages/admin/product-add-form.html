@@ -9,7 +9,7 @@
 
 <h1>Add New Product</h1>
 
-<form action="/products/add" method="post" th:object="${product}">
+<form action="/admin/products/add" method="post" th:object="${product}">
     <div>
         <label for="modelId">Model Id:</label>
         <input type="text" id="modelId" name="modelId" th:field="*{modelId}" required />
@@ -53,7 +53,7 @@
     <button type="submit">Add Product</button>
 </form>
 
-<a th:href="@{/}" class="button">Back to Homepage</a>
+<a href="/admin" class="button">Back to Homepage</a>
 
 </body>
 </html>

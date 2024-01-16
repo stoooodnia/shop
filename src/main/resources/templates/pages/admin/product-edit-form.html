@@ -9,7 +9,7 @@
 
 <h1>Edit Product</h1>
 
-<form th:action="@{'/products/edit/' + ${product.getProductId()}}" method="post" th:object="${product}" th:method="post">
+<form th:action="@{'/admin/products/edit/' + ${product.getProductId()}}" method="post" th:object="${product}" th:method="post">
 
   <div>
     <label for="modelId">Model ID:</label>
@@ -54,6 +54,6 @@
   <button type="submit">Save Changes</button>
 </form>
 
-<a th:href="@{/}" class="button">Back to Homepage</a>
+<a href="/admin" class="button">Back to Homepage</a>
 </body>
 </html>

@@ -44,39 +44,6 @@ public class GeneralController {
         return "pages/product-details";
     }
 
-    @GetMapping("/products/add")
-    public String showAddProductForm(Model model) {
-        model.addAttribute("product", new Product());
-        return "pages/product-add-form";
-    }
-
-    @PostMapping("/products/add")
-    public String addProduct(@ModelAttribute Product product) {
-        generalService.addProduct(product);
-        return "redirect:/";
-    }
-
-    @GetMapping("/products/delete/{id}")
-    public String deleteProduct(@PathVariable("id") String id) {
-        long productId = Long.parseLong(id);
-        generalService.deleteProduct(productId);
-        return "redirect:/";
-    }
-
-    @GetMapping("/products/edit/{id}")
-    public String editProduct(Model model, @PathVariable("id") String id) {
-        long productId = Long.parseLong(id);
-        model.addAttribute("product", generalService.getProductById(productId));
-        return "pages/product-edit-form";
-    }
-
-    @PostMapping("/products/edit/{id}")
-    public String editProduct(@ModelAttribute Product product, @PathVariable("id") String id) {
-        long productId = Long.parseLong(id);
-        product.setProductId(productId);
-        generalService.editProduct(product);
-        return "redirect:/";
-    }
     @GetMapping("/products/{id}/reviews")
     public String productReviews(Model model, @PathVariable("id") String id){
         long productId = Long.parseLong(id);
@@ -87,7 +54,7 @@ public class GeneralController {
     }
 
     @GetMapping("/products/{id}/reviews/add")
-    public String showAddReviewForm(Model model, @PathVariable("id") Long productId) {
+    public String addReview(Model model, @PathVariable("id") Long productId) {
         Product product = generalService.getProductById(productId);
         if (product != null) {
             model.addAttribute("product", product);
@@ -111,35 +78,4 @@ public class GeneralController {
             return "redirect:/";
         }
     }
-
-    @GetMapping("/products/{id}/reviews/edit/{reviewId}")
-    public String editReview(Model model, @PathVariable("id") String id, @PathVariable("reviewId") String reviewId) {
-        long productId = Long.parseLong(id);
-        long reviewIdParsed = Long.parseLong(reviewId);
-        model.addAttribute("product", generalService.getProductById(productId));
-        model.addAttribute("review", generalService.getReviewById(reviewIdParsed));
-        return "pages/edit-review-form";
-    }
-
-    @PostMapping("/products/{id}/reviews/edit/{reviewId}")
-    public String editReview(@ModelAttribute Review review, @PathVariable("id") String id, @PathVariable("reviewId") String reviewId) {
-        long productId = Long.parseLong(id);
-        long reviewIdParsed = Long.parseLong(reviewId);
-        review.setReviewId(reviewIdParsed);
-        review.setProductId(productId);
-        review.setDate(LocalDate.now().toString());
-        generalService.editReview(review);
-        generalService.updateAverageRating(productId);
-        return "redirect:/";
-    }
-
-    @GetMapping("/products/{id}/reviews/delete/{reviewId}")
-    public String deleteReview(@PathVariable("id") String id, @PathVariable("reviewId") String reviewId) {
-        long productId = Long.parseLong(id);
-        long reviewIdParsed = Long.parseLong(reviewId);
-        generalService.deleteReview(reviewIdParsed);
-        generalService.updateAverageRating(productId);
-        return "redirect:/";
-    }
-
 }
