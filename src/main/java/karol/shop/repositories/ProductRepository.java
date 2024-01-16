@@ -39,12 +39,21 @@ public class ProductRepository implements IProductRepository{
     }
 
     @Override
-    public void changeQuantity(int quantity, long product_id) {
+    public void changeQuantityOfProduct(int quantity, long product_id) {
         ProductDao.updateQuantity(quantity, product_id);
     }
 
     @Override
     public void addProduct(Product product ) {
+        ProductDao.save(product);
+    }
+
+    @Override
+    public void deleteProduct(long productId) {
+        ProductDao.deleteById(productId);
+    }
+    @Override
+    public void updateProduct(Product product) {
         ProductDao.save(product);
     }
 
@@ -67,16 +76,5 @@ public class ProductRepository implements IProductRepository{
     public ArrayList<Review> getReviewsOf(long product_id) {
         return ReviewDao.findByProductId(product_id);
     }
-
-    @Override
-    public void updateProduct(Product product) {
-        ProductDao.save(product);
-    }
-
-    @Override
-    public void deleteProduct(long productId) {
-        ProductDao.deleteById(productId);
-    }
-
 
 }

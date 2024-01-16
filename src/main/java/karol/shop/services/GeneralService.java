@@ -33,7 +33,7 @@ public class GeneralService {
     }
 
     public void changeQuantity(int quantity, long productId) {
-        productRepository.changeQuantity(quantity, productId);
+        productRepository.changeQuantityOfProduct(quantity, productId);
     }
 
     public void addProduct(Product product) {
@@ -41,6 +41,7 @@ public class GeneralService {
     }
     public void deleteProduct(long productId) { productRepository.deleteProduct(productId); }
 
+    public void editProduct(Product product) { productRepository.updateProduct(product); }
     public void deleteReview(long reviewId) {
         productRepository.deleteReview(reviewId);
     }
