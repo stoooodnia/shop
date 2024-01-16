@@ -5,4 +5,5 @@
     <div> Content: </div>
     <div th:text="${review.getContent()}"></div>
     <a class="edit" th:href="@{'/products/' + ${product.getProductId()} + '/reviews/edit/' + ${review.getReviewId()}}">Edit</a>
+    <a class="delete" th:href="@{'/products/' + ${product.getProductId()} + '/reviews/delete/' + ${review.getReviewId()}}">Delete</a>
 </div>

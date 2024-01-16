@@ -133,4 +133,13 @@ public class GeneralController {
         return "redirect:/";
     }
 
+    @GetMapping("/products/{id}/reviews/delete/{reviewId}")
+    public String deleteReview(@PathVariable("id") String id, @PathVariable("reviewId") String reviewId) {
+        long productId = Long.parseLong(id);
+        long reviewIdParsed = Long.parseLong(reviewId);
+        generalService.deleteReview(reviewIdParsed);
+        generalService.updateAverageRating(productId);
+        return "redirect:/";
+    }
+
 }

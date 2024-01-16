@@ -28,6 +28,10 @@ public class GeneralService {
     public int getAverageRatingOf(long productId) {
         // Stream API
         ArrayList<Review> reviews = productRepository.findReviewsByProductId(productId);
+        // exception for empty list
+        if (reviews.size() == 0) {
+            return 0;
+        }
         return reviews.stream()
                 .reduce(0, (sum, review) -> sum + review.getRating(), Integer::sum) / (reviews.size());
     }
