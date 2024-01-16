@@ -18,6 +18,7 @@ public interface IProductRepository {
     ArrayList<Review> getReviewsOf(long product_id); // zwraca wszystkie recenzje produktu
     void updateProduct(Product product); // aktualizuje produkt
 
+    void deleteProduct(long productId);
 
 
     // po rozwinięciu szczegółów mamy dwie kategorie, szczegóły produktu - np. dostawy i opinie.

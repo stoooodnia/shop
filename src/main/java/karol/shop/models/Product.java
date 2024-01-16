@@ -13,7 +13,7 @@ public class Product
 {
 
     @Id
-    @GeneratedValue(generator = "uuid")
+    @GeneratedValue(generator = "increment")
     private long productId;
     private String modelId;
     private String title;
@@ -31,6 +31,8 @@ public class Product
     public Product() {
         this.averageRating = 0;
     }
+
+
     public Product(long productId, String modelId, String title, String photoUrl, double price, double deliveryPrice, String description, int quantity, String details) {
         this.productId = productId;
         this.modelId = modelId;

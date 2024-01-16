@@ -39,6 +39,7 @@ public class GeneralService {
     public void addProduct(Product product) {
         productRepository.addProduct(product);
     }
+    public void deleteProduct(long productId) { productRepository.deleteProduct(productId); }
 
     public void deleteReview(long reviewId) {
         productRepository.deleteReview(reviewId);
@@ -61,6 +62,7 @@ public class GeneralService {
         product.setAverageRating(getAverageRatingOf(product_id));
         productRepository.updateProduct(product);
     }
+
 
 
 }

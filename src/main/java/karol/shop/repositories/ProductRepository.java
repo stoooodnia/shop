@@ -73,7 +73,10 @@ public class ProductRepository implements IProductRepository{
         ProductDao.save(product);
     }
 
-
+    @Override
+    public void deleteProduct(long productId) {
+        ProductDao.deleteById(productId);
+    }
 
 
 }

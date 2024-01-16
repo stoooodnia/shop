@@ -18,5 +18,6 @@
   <a class="details" th:href="@{/products/{id}(id=${product.getProductId()})}">Details</a>
   <a class="addToCard" th:href="@{/cart/add/{id}(id=${product.getProductId()})}">Add to cart</a>
   <a class="edit" th:href="@{/products/edit/{id}(id=${product.getProductId()})}">Edit</a>
+  <a class="delete" th:href="@{/products/delete/{id}(id=${product.getProductId()})}">Delete</a>
 </div>
 

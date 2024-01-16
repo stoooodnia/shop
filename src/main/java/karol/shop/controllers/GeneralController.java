@@ -44,6 +44,25 @@ public class GeneralController {
         return "pages/product-details";
     }
 
+    @GetMapping("/products/add")
+    public String showAddProductForm(Model model) {
+        model.addAttribute("product", new Product());
+        return "pages/product-add-form";
+    }
+
+    @PostMapping("/products/add")
+    public String addProduct(@ModelAttribute Product product) {
+        generalService.addProduct(product);
+        return "redirect:/";
+    }
+
+    @GetMapping("/products/delete/{id}")
+    public String deleteProduct(@PathVariable("id") String id) {
+        long productId = Long.parseLong(id);
+        generalService.deleteProduct(productId);
+        return "redirect:/";
+    }
+
     @GetMapping("/products/{id}/reviews")
     public String productReviews(Model model, @PathVariable("id") String id){
         long productId = Long.parseLong(id);
