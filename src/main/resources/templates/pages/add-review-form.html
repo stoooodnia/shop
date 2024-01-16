@@ -8,11 +8,6 @@
   <link rel="stylesheet"  th:href="@{/css/style.css}"/>
 </head>
 <body>
-
-<div th:if="${successMessage}">
-  <div th:text="${successMessage}" />
-</div>
-
 <h1>Shop</h1>
 
 <div th:if="${errorMessage}">
@@ -21,7 +16,7 @@
 
 <div class="container">
   <h2 th:text="${'Add Review for ' + product.getTitle()}"></h2>
-  <form th:action="@{'/products/' + ${product.getProductId()} + '/add-review'}" method="post" th:object="${review}">
+  <form th:action="@{'/products/' + ${product.getProductId()} + '/reviews/add'}" method="post" th:object="${review}">
     <div class="form-group">
       <label for="author">Author:</label>
       <input type="text" class="form-control" id="author" name="author" th:field="*{author}" required>

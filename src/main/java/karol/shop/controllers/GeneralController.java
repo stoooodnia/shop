@@ -97,8 +97,8 @@ public class GeneralController {
             return "redirect:/";
         }
     }
-    @PostMapping("/products/{productId}/add-review")
-    public String addReview(@PathVariable Long productId, @ModelAttribute Review review) {
+    @PostMapping("/products/{id}/reviews/add")
+    public String addReview(@PathVariable("id") Long productId, @ModelAttribute Review review) {
         Product product = generalService.getProductById(productId);
         if (product != null) {
             // Dodanie opinii do produktu
@@ -111,4 +111,26 @@ public class GeneralController {
             return "redirect:/";
         }
     }
+
+    @GetMapping("/products/{id}/reviews/edit/{reviewId}")
+    public String editReview(Model model, @PathVariable("id") String id, @PathVariable("reviewId") String reviewId) {
+        long productId = Long.parseLong(id);
+        long reviewIdParsed = Long.parseLong(reviewId);
+        model.addAttribute("product", generalService.getProductById(productId));
+        model.addAttribute("review", generalService.getReviewById(reviewIdParsed));
+        return "pages/edit-review-form";
+    }
+
+    @PostMapping("/products/{id}/reviews/edit/{reviewId}")
+    public String editReview(@ModelAttribute Review review, @PathVariable("id") String id, @PathVariable("reviewId") String reviewId) {
+        long productId = Long.parseLong(id);
+        long reviewIdParsed = Long.parseLong(reviewId);
+        review.setReviewId(reviewIdParsed);
+        review.setProductId(productId);
+        review.setDate(LocalDate.now().toString());
+        generalService.editReview(review);
+        generalService.updateAverageRating(productId);
+        return "redirect:/";
+    }
+
 }

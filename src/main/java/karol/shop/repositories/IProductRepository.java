@@ -20,6 +20,7 @@ public interface IProductRepository {
     Product getProductById(long product_id); // zwraca produkt o podanym id
     ArrayList<Review> getReviewsOf(long product_id); // zwraca wszystkie recenzje produktu
 
+    Object getReviewById(long reviewId);
 
 
     // po rozwinięciu szczegółów mamy dwie kategorie, szczegóły produktu - np. dostawy i opinie.

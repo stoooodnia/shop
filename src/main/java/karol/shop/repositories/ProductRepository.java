@@ -77,4 +77,7 @@ public class ProductRepository implements IProductRepository{
         return ReviewDao.findByProductId(product_id);
     }
 
+    @Override
+    public Object getReviewById(long reviewId) { return ReviewDao.findById(reviewId); }
+
 }

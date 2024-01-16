@@ -65,5 +65,7 @@ public class GeneralService {
     }
 
 
-
+    public Object getReviewById(long reviewId) {
+        return productRepository.getReviewById(reviewId);
+    }
 }
