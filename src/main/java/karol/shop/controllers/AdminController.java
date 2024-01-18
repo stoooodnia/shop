@@ -87,6 +87,32 @@ public class AdminController {
         return "redirect:/admin";
     }
 
+    @GetMapping("/admin/products/{id}/reviews/add")
+    public String addReview(Model model, @PathVariable("id") Long productId) {
+        Product product = generalService.getProductById(productId);
+        if (product != null) {
+            model.addAttribute("product", product);
+            model.addAttribute("review", new Review());
+            return "pages/admin/admin-add-review-form";
+        } else {
+            return "redirect:/";
+        }
+    }
+    @PostMapping("/admin/products/{id}/reviews/add")
+    public String addReview(@PathVariable("id") Long productId, @ModelAttribute Review review) {
+        Product product = generalService.getProductById(productId);
+        if (product != null) {
+            // Dodanie opinii do produktu
+            review.setProductId(product.getProductId());
+            review.setDate(LocalDate.now().toString());
+            generalService.addReview(review);
+            generalService.updateAverageRating(productId);
+            return "redirect:/admin";
+        } else {
+            return "redirect:/admin";
+        }
+    }
+
     @GetMapping("/admin/products/{id}/reviews/edit/{reviewId}")
     public String editReview(Model model, @PathVariable("id") String id, @PathVariable("reviewId") String reviewId) {
         long productId = Long.parseLong(id);

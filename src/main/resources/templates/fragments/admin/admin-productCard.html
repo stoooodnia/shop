@@ -9,7 +9,7 @@
   <div> Average rating: </div>
   <th:block th:if="${product.getAverageRating() == 0}">
     <p>No reviews yet</p>
-    <a class="button" th:href="@{'/products/' + ${product.getProductId()} + '/reviews/add'}">Add review</a>
+    <a class="button" th:href="@{'/admin/products/' + ${product.getProductId()} + '/reviews/add'}">Add review</a>
   </th:block>
   <th:block th:if="${product.getAverageRating() > 0}">
     <span th:each="star : ${#numbers.sequence(1, product.getAverageRating())}">⭐</span>

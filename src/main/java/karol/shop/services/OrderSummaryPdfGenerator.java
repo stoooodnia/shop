@@ -20,7 +20,6 @@ public class OrderSummaryPdfGenerator {
             PdfWriter.getInstance(document, baos);
             document.open();
 
-            // Dodaj informacje o zamówieniu
             document.add(new Paragraph("Order Summary:"));
             for (Product product : products) {
                 document.add(new Paragraph(product.getTitle() + " - Quantity: " + product.getQuantity() + " - price: " + product.getPrice() + "$" + " - delivery price: " + product.getDeliveryPrice() + "$"));
@@ -28,7 +27,6 @@ public class OrderSummaryPdfGenerator {
             document.add(new Paragraph("Total Price: " + totalPrice + "$"));
             document.add(new Paragraph("Total Price with Delivery: " + (totalPriceWithDelivery) + "$"));
 
-            // Dodaj informacje o dostawie
             document.add(new Paragraph("\nDelivery Details:"));
             document.add(new Paragraph("Delivery Method: " + deliveryForm.getDeliveryMethod()));
             document.add(new Paragraph("Street: " + deliveryForm.getStreet()));

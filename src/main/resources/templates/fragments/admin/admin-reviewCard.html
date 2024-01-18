@@ -4,6 +4,6 @@
     <span th:each="star : ${#numbers.sequence(1, review.getRating())}">⭐</span>
     <div> Content: </div>
     <div th:text="${review.getContent()}"></div>
-    <a class="edit" th:href="@{'/products/' + ${product.getProductId()} + '/reviews/edit/' + ${review.getReviewId()}}">Edit</a>
-    <a class="delete" th:href="@{'/products/' + ${product.getProductId()} + '/reviews/delete/' + ${review.getReviewId()}}">Delete</a>
+    <a class="edit" th:href="@{'/admin/products/' + ${product.getProductId()} + '/reviews/edit/' + ${review.getReviewId()}}">Edit</a>
+    <a class="delete" th:href="@{'/admin/products/' + ${product.getProductId()} + '/reviews/delete/' + ${review.getReviewId()}}">Delete</a>
 </div>

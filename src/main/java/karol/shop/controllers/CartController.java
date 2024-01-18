@@ -103,20 +103,17 @@ public class CartController {
 
     @GetMapping("/cart/download-summary")
     public ResponseEntity<byte[]> downloadOrderSummaryPdf(Model model) {
-        // Odczytaj plik PDF z modelu
         byte[] pdfBytes = cartService.getSummaryPdf();
 
         if (pdfBytes != null) {
-            // Utwórz nagłówki dla odpowiedzi HTTP
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
             headers.setContentDisposition(ContentDisposition.builder("inline").filename("order-summary.pdf").build());
 
-            // Zwróć odpowiedź z plikiem PDF
             return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
         } else {
             System.out.println("PDF nie istnieje");
-            // Jeśli plik PDF nie istnieje, zwróć odpowiedź z błędem
+
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

@@ -24,8 +24,6 @@ public class ProductRepository implements IProductRepository{
     public ArrayList<Product> findAllProducts() {
         ArrayList<Product> products = (ArrayList<Product>) ProductDao.findAll();
         return products;
-        // Przy dodawaniu opinii średnia opinia się
-        // zaktualizuje więc nie trzeba jej będzie ciągle dodawać do modelu
     }
 
     @Override
