@@ -15,6 +15,9 @@
   <a href="/admin" class="button">OŚWIADCZAM, ZE JESTEM ADMINISTRATOREM</a>
   <h1>Shop</h1>
   <div class="all-products-container" >
+    <div th:if="${allProducts.isEmpty()}">
+      <p> no products by this model</p>
+    </div>
     <div th:each="product : ${allProducts}">
       <div th:replace="~{fragments/productCard :: productCard(product=${product})}"></div>
     </div>

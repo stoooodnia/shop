@@ -1,0 +1,11 @@
+<div th:fragment="models-filter (availableModels, modelsfilterForm)">
+<form action="#" th:action="@{model-filter}" th:object="${modelsFilterForm}" method="post">
+  <div>
+    <label for="modelFilter">Select Model:</label>
+    <select id="modelFilter" name="modelFilter" th:field="*{modelsFilterForm.getSelectedModel()}" onchange="this.form.submit()">
+      <option value="all">All Models</option>
+      <option th:each="model : ${availableModels}" th:value="${model}" th:text="${model}"></option>
+    </select>
+  </div>
+</form>
+</div>

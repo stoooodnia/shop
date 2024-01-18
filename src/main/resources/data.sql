@@ -1,9 +1,12 @@
 INSERT INTO PRODUCT (product_id, model_id, title, photo_url, price, delivery_price, description, quantity, details, average_rating)
 VALUES
     (1,'PHONE', 'iPhone 13', 'https://www.mediaexpert.pl/media/cache/resolve/gallery/images/32/3225298/APPLE_iPhone_13__front_czarny.jpg', 799.99, 9.99, 'Nowoczesny smartfon z wieloma funkcjami.', 100, 'Specyfikacje: ...', 0),
-    (2,'LAPTOP', 'MacBook Air M1', 'https://a.allegroimg.com/s512/112cf6/59c293444b2bb370b08cc62f5ed6/Laptop-Apple-MacBook-Air-M1-3-2-8GB-128GB-Szary-2020-Kod-producenta-A2337', 1299.99, 19.99, 'Wydajny laptop idealny do pracy i rozrywki.', 50, 'Specyfikacje: ...', 0);
--- INSERT INTO REVIEW (review_id, product_id, author, date, rating, content)
--- VALUES
---     (1, 1, 'Jan Kowalski', '2022-01-01', 5, 'Świetny produkt!'),
---     (2, 1, 'Anna Nowak', '2022-02-15', 4, 'Działa dobrze, ale cena mogłaby być trochę niższa.'),
---     (3, 2, 'Marek Wiśniewski', '2022-03-10', 5, 'Bardzo wydajny laptop, polecam!');
+    (2,'LAPTOP', 'MacBook Air M1', 'https://a.allegroimg.com/s512/112cf6/59c293444b2bb370b08cc62f5ed6/Laptop-Apple-MacBook-Air-M1-3-2-8GB-128GB-Szary-2020-Kod-producenta-A2337', 1299.99, 19.99, 'Wydajny laptop idealny do pracy i rozrywki.', 50, 'Specyfikacje: ...', 0),
+    (3, 'PHONE', 'Samsung Galaxy S21', 'https://a.allegroimg.com/original/115a9a/ff97ea634a36ada280860cf49e0d/Samsung-Galaxy-S21-5G-SM-G991B-8-128GB-Fioletowy', 899.99, 12.99, 'Elegancki smartfon z doskonałym aparatem.', 80, 'Specyfikacje: ...', 0),
+    (4, 'PHONE', 'Google Pixel 6', 'https://prod-api.mediaexpert.pl/api/images/gallery_500_500/thumbnails/images/52/5293436/Smartfon-GOOGLE-Pixel-6-Pro-8-128GB-5G-6-7-120Hz-Czarny-front-tyl.jpg', 749.99, 10.99, 'Innowacyjny smartfon z najnowszym systemem operacyjnym.', 120, 'Specyfikacje: ...', 0),
+    (5, 'LAPTOP', 'Dell XPS 13', 'https://amso.pl/pol_pl_Nowy-laptop-Dell-XPS-13-PLUS-9320-i5-1240P-8GB-512GB-1920x1080-Windows-11-Professional-244133_4.jpg', 1499.99, 24.99, 'Najnowszy laptop z ekranem InfinityEdge.', 30, 'Specyfikacje: ...', 0),
+    (6, 'LAPTOP', 'HP Spectre x360', 'https://swiat-laptopow.pl/2234-medium_default/laptop-hp-spectre-x360-13-aw2014nw-38v50ea-intel-core-i7-16gb-ssd-2tb-intel-xe-fullhd-win-11-czarny.jpg', 1299.99, 19.99, 'Przetwarzaj pliki i oglądaj multimedia z maksymalną wydajnością.', 40, 'Specyfikacje: ...', 0),
+    (7, 'LAPTOP', 'Lenovo ThinkPad X1 Carbon', 'https://elenovo.pl/9254-large_default/lenovo-thinkpad-x1-carbon-gen-11-core-i7-1355u-14-wuxga-16gb-512gb-ssd-w11-p.jpg', 1699.99, 29.99, 'Laptop biznesowy o niezawodnej wydajności.', 20, 'Specyfikacje: ...', 0),
+    (8, 'HEADPHONES', 'Sony WH-1000XM4', 'https://www.sony.pl/image/5d02da5df552836db894cead8a68f5f3?fmt=pjpeg&wid=330&bgcolor=FFFFFF&bgc=FFFFFF', 349.99, 9.99, 'Zestaw słuchawkowy z funkcją redukcji hałasu.', 60, 'Specyfikacje: ...', 0),
+    (9, 'HEADPHONES', 'Bose QuietComfort 35 II', 'https://m.media-amazon.com/images/I/81+jNVOUsJL._AC_UF1000,1000_QL80_.jpg', 299.99, 8.99, 'Słuchawki douszne z doskonałym dźwiękiem.', 50, 'Specyfikacje: ...', 0),
+    (10, 'HEADPHONES', 'AirPods Pro', 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MTJV3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1694014871985', 249.99, 7.99, 'Bezprzewodowe słuchawki douszne od Apple.', 70, 'Specyfikacje: ...', 0);

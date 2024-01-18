@@ -36,10 +36,6 @@ public class GeneralService {
                 .reduce(0, (sum, review) -> sum + review.getRating(), Integer::sum) / (reviews.size());
     }
 
-    public void changeQuantity(int quantity, long productId) {
-        productRepository.changeQuantityOfProduct(quantity, productId);
-    }
-
     public void addProduct(Product product) {
         productRepository.addProduct(product);
     }
@@ -71,5 +67,16 @@ public class GeneralService {
 
     public Object getReviewById(long reviewId) {
         return productRepository.getReviewById(reviewId);
+    }
+
+    public Object getProductsByModel(String modelString) {
+        ArrayList<Product> products = getAll();
+        ArrayList<Product> productsByModel = new ArrayList<>();
+        for (Product product : products) {
+            if (product.getModelId().equals(modelString)) {
+                productsByModel.add(product);
+            }
+        }
+        return productsByModel;
     }
 }

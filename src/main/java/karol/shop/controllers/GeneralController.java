@@ -78,4 +78,14 @@ public class GeneralController {
             return "redirect:/";
         }
     }
+
+    @GetMapping("/products/model={model}")
+    public String productsByModel(Model model, @PathVariable("model") String modelString){
+        model.addAttribute("allProducts", generalService.getProductsByModel(modelString));
+        model.addAttribute("cart", cartService.getCart());
+        return "pages/general";
+    }
+
+
+
 }
