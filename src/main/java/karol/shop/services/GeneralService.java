@@ -7,6 +7,7 @@ import karol.shop.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -85,7 +86,7 @@ public class GeneralService {
         return productsByModel;
     }
 
-    public Object getAvailableModels() {
+    public ArrayList<String> getAvailableModels() {
         ArrayList<Product> products = getAll();
         ArrayList<String> models = new ArrayList<>();
         for (Product product : products) {
@@ -100,7 +101,7 @@ public class GeneralService {
         return new ModelsFilterForm();
     }
 
-    public Object getProductsByModelSortedByPrice(String modelString, String sortDirection) {
+    public ArrayList<Product> getProductsByModelSortedByPrice(String modelString, String sortDirection) {
         ArrayList<Product> products = getProductsByModel(modelString);
         if (sortDirection.equals("asc")) {
             products.sort((p1, p2) -> (int) (p1.getPrice() - p2.getPrice()));
@@ -110,7 +111,7 @@ public class GeneralService {
         return products;
     }
 
-    public Object getProductsByModelSortedByRating(String modelString, String sortDirection) {
+    public ArrayList<Product> getProductsByModelSortedByRating(String modelString, String sortDirection) {
         ArrayList<Product> products = getProductsByModel(modelString);
         if (sortDirection.equals("asc")) {
             products.sort(Comparator.comparingInt(Product::getAverageRating)); // inaczej bo krzyczało

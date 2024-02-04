@@ -1,8 +1,0 @@
-<div class="review" th:fragment="reviewCard (review) ">
-    <div th:text="${'Author: ' + review.getAuthor()}"></div>
-    <div th:text="${'Date: ' + review.getDate()}"></div>
-    <span th:each="star : ${#numbers.sequence(1, review.getRating())}">⭐</span>
-    <div> Content: </div>
-    <div th:text="${review.getContent()}"></div>
-
-</div>
