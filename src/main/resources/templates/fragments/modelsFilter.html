@@ -1,5 +1,5 @@
 <div th:fragment="modelsFilter (availableModels, modelsFilterForm)">
-<form action="#" th:action="@{model-filter}" th:object="${modelsFilterForm}" method="post">
+<form action="/products/model-filter" th:object="${modelsFilterForm}" method="post">
   <div>
     <label for="modelFilter">Select Model:</label>
     <select id="modelFilter" name="modelFilter" th:field="*{selectedModel}" onchange="this.form.submit()">

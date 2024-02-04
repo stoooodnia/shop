@@ -1,5 +1,6 @@
 package karol.shop.controllers;
 
+import karol.shop.models.ModelsFilterForm;
 import karol.shop.models.Product;
 import karol.shop.models.Review;
 import karol.shop.services.CartService;
@@ -32,7 +33,6 @@ public class GeneralController {
         }
 
         model.addAttribute("availableModels", generalService.getAvailableModels());
-        System.out.println("available models: " + generalService.getAvailableModels());
         model.addAttribute("modelsFilterForm", generalService.getModelsForm());
         model.addAttribute("allProducts", generalService.getAll());
         model.addAttribute("cart", cartService.getCart());
@@ -83,11 +83,20 @@ public class GeneralController {
         }
     }
 
+    @PostMapping("/products/model-filter")
+    public String filterByModel(@ModelAttribute("modelsFilterForm") ModelsFilterForm modelsFilterForm){
+        System.out.println("model: " + modelsFilterForm.getSelectedModel());
+        return "redirect:/products/model=" + modelsFilterForm.getSelectedModel();
+    }
     @GetMapping("/products/model={model}")
     public String productsByModel(Model model, @PathVariable("model") String modelString){
-        if(modelString == null || modelString.equals("")){
+        if(modelString == null || modelString.equals("") || modelString.equals("all")){
             return "redirect:/";
         }
+        ModelsFilterForm modelsFilterForm = new ModelsFilterForm();
+        modelsFilterForm.setSelectedModel(modelString);
+        model.addAttribute("availableModels", generalService.getAvailableModels());
+        model.addAttribute("modelsFilterForm", modelsFilterForm);
         model.addAttribute("allProducts", generalService.getProductsByModel(modelString));
         model.addAttribute("cart", cartService.getCart());
         return "pages/general";
