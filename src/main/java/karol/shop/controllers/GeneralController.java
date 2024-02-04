@@ -7,10 +7,7 @@ import karol.shop.services.CartService;
 import karol.shop.services.GeneralService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -85,22 +82,43 @@ public class GeneralController {
 
     @PostMapping("/products/model-filter")
     public String filterByModel(@ModelAttribute("modelsFilterForm") ModelsFilterForm modelsFilterForm){
-        System.out.println("model: " + modelsFilterForm.getSelectedModel());
-        return "redirect:/products/model=" + modelsFilterForm.getSelectedModel();
+        String model = modelsFilterForm.getSelectedModel();
+        String sortOption = modelsFilterForm.getSelectedSortOption();
+        String sortDirection = modelsFilterForm.getSelectedSortDirection();
+        return "redirect:/products/model=" + model + "?sortOption=" + sortOption + "&sortDirection=" + sortDirection;
     }
     @GetMapping("/products/model={model}")
-    public String productsByModel(Model model, @PathVariable("model") String modelString){
-        if(modelString == null || modelString.equals("") || modelString.equals("all")){
-            return "redirect:/";
+    public String productsByModel(Model model,
+                                  @PathVariable("model") String modelString,
+                                  @RequestParam String sortOption,
+                                  @RequestParam String sortDirection){
+
+//        if(modelString == null || modelString.equals("") || modelString.equals("all")){
+//            return "redirect:/";
+//        }
+
+        switch (sortOption) {
+            case "price":
+                model.addAttribute("allProducts", generalService.getProductsByModelSortedByPrice(modelString, sortDirection));
+                break;
+            case "rating":
+                model.addAttribute("allProducts", generalService.getProductsByModelSortedByRating(modelString, sortDirection));
+                break;
+            default:
+                model.addAttribute("allProducts", generalService.getProductsByModel(modelString));
+                break;
         }
+
         ModelsFilterForm modelsFilterForm = new ModelsFilterForm();
         modelsFilterForm.setSelectedModel(modelString);
+        modelsFilterForm.setSelectedSortOption(sortOption);
+        modelsFilterForm.setSelectedSortDirection(sortDirection);
         model.addAttribute("availableModels", generalService.getAvailableModels());
         model.addAttribute("modelsFilterForm", modelsFilterForm);
-        model.addAttribute("allProducts", generalService.getProductsByModel(modelString));
         model.addAttribute("cart", cartService.getCart());
         return "pages/general";
     }
+
 
 
 

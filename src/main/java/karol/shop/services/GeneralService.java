@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 @Service
 public class GeneralService {
@@ -70,7 +71,10 @@ public class GeneralService {
         return productRepository.getReviewById(reviewId);
     }
 
-    public Object getProductsByModel(String modelString) {
+    public ArrayList<Product> getProductsByModel(String modelString) {
+        if (modelString.equals("all")) {
+            return getAll();
+        }
         ArrayList<Product> products = getAll();
         ArrayList<Product> productsByModel = new ArrayList<>();
         for (Product product : products) {
@@ -94,5 +98,25 @@ public class GeneralService {
 
     public Object getModelsForm() {
         return new ModelsFilterForm();
+    }
+
+    public Object getProductsByModelSortedByPrice(String modelString, String sortDirection) {
+        ArrayList<Product> products = getProductsByModel(modelString);
+        if (sortDirection.equals("asc")) {
+            products.sort((p1, p2) -> (int) (p1.getPrice() - p2.getPrice()));
+        } else {
+            products.sort((p1, p2) -> (int) (p2.getPrice() - p1.getPrice()));
+        }
+        return products;
+    }
+
+    public Object getProductsByModelSortedByRating(String modelString, String sortDirection) {
+        ArrayList<Product> products = getProductsByModel(modelString);
+        if (sortDirection.equals("asc")) {
+            products.sort(Comparator.comparingInt(Product::getAverageRating)); // inaczej bo krzyczało
+        } else {
+            products.sort((p1, p2) -> (p2.getAverageRating() - p1.getAverageRating()));
+        }
+        return products;
     }
 }
