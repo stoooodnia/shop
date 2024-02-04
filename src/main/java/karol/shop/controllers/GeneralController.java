@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 @Controller
 public class GeneralController {
@@ -30,6 +31,9 @@ public class GeneralController {
             model.addAttribute("errorMessage", error);
         }
 
+        model.addAttribute("availableModels", generalService.getAvailableModels());
+        System.out.println("available models: " + generalService.getAvailableModels());
+        model.addAttribute("modelsFilterForm", generalService.getModelsForm());
         model.addAttribute("allProducts", generalService.getAll());
         model.addAttribute("cart", cartService.getCart());
         System.out.println("cart price: " + cartService.getCart().getTotalPrice());
@@ -81,6 +85,9 @@ public class GeneralController {
 
     @GetMapping("/products/model={model}")
     public String productsByModel(Model model, @PathVariable("model") String modelString){
+        if(modelString == null || modelString.equals("")){
+            return "redirect:/";
+        }
         model.addAttribute("allProducts", generalService.getProductsByModel(modelString));
         model.addAttribute("cart", cartService.getCart());
         return "pages/general";

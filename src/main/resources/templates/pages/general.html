@@ -14,6 +14,7 @@
   </div>
   <a href="/admin" class="button">OŚWIADCZAM, ZE JESTEM ADMINISTRATOREM</a>
   <h1>Shop</h1>
+    <div th:replace="~{fragments/modelsFilter :: modelsFilter(modelsFilterForm=${modelsFilterForm}, availableModels=${availableModels})}"></div>
   <div class="all-products-container" >
     <div th:if="${allProducts.isEmpty()}">
       <p> no products by this model</p>

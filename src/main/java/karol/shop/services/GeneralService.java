@@ -1,5 +1,6 @@
 package karol.shop.services;
 
+import karol.shop.models.ModelsFilterForm;
 import karol.shop.models.Product;
 import karol.shop.models.Review;
 import karol.shop.repositories.ProductRepository;
@@ -78,5 +79,20 @@ public class GeneralService {
             }
         }
         return productsByModel;
+    }
+
+    public Object getAvailableModels() {
+        ArrayList<Product> products = getAll();
+        ArrayList<String> models = new ArrayList<>();
+        for (Product product : products) {
+            if (!models.contains(product.getModelId())) {
+                models.add(product.getModelId());
+            }
+        }
+        return models;
+    }
+
+    public Object getModelsForm() {
+        return new ModelsFilterForm();
     }
 }
