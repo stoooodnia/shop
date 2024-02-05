@@ -25,31 +25,33 @@ public class CartService {
         return shoppingCart;
     }
 
-    public void addToCart(long productId) {
+    public void addToCart(long productId, long quantity) {
         Product product = productRepository.getProductById(productId);
-        // prototype pattern
+        // Prototype pattern
         Product newProduct = product.cloneProduct();
 
-        // check if product is already in cart to prevent duplicates
-        if(shoppingCart.contains(productId)) {
-            Product temp = shoppingCart.findProduct(productId);
-                    temp.setQuantity(temp.getQuantity() + 1);
+        Product existingProduct = shoppingCart.findProduct(productId);
+        if (existingProduct != null) {
+            existingProduct.setQuantity(existingProduct.getQuantity() + quantity);
         } else {
-            newProduct.setQuantity(1);
+            newProduct.setQuantity(quantity);
             shoppingCart.addProduct(newProduct);
         }
 
         Product productInStock = productRepository.getProductById(productId);
-        productInStock.setQuantity(productInStock.getQuantity() - 1);
+        productInStock.setQuantity(productInStock.getQuantity() - quantity);
         productRepository.updateProduct(productInStock);
 
         shoppingCart.calculateTotalPrice();
         shoppingCart.calculateTotalPriceWithDelivery();
     }
 
-    public void updateCart(long productId, int quantity) {
+    public void updateCart(long productId, long quantity) {
 
         Product productInCart = shoppingCart.findProduct(productId);
+        if (productInCart == null) {
+            throw new IllegalArgumentException("Product not in cart");
+        }
         Product productInStock = productRepository.getProductById(productId);
         // check if there is enough quantity of product in stock
         if(quantity > productInStock.getQuantity() + productInCart.getQuantity()) {
@@ -80,6 +82,9 @@ public class CartService {
 
     public void removeFromCart(long productId) {
         Product productInCart = shoppingCart.findProduct(productId);
+        if (productInCart == null) {
+            throw new IllegalArgumentException("Product not in cart");
+        }
         Product productInStock = productRepository.getProductById(productId);
         productInStock.setQuantity(productInStock.getQuantity() + productInCart.getQuantity());
         productRepository.updateProduct(productInStock);

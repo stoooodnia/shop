@@ -1,6 +1,7 @@
 package karol.shop.controllers;
 
 import karol.shop.models.DeliveryForm;
+import karol.shop.models.ShoppingCart;
 import karol.shop.services.CartService;
 import karol.shop.services.GeneralService;
 import karol.shop.services.OrderSummaryPdfGenerator;
@@ -9,8 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
-@RequestMapping("/api/cart")
+@RequestMapping("/cart")
 public class CartRestController {
     private final GeneralService generalService;
     private final CartService cartService;
@@ -23,26 +26,41 @@ public class CartRestController {
         this.orderSummaryPdfGenerator = orderSummaryPdfGenerator;
     }
 
-    @PostMapping("/add/{id}")
-    public ResponseEntity<String> addToCart(@PathVariable("id") Long id) {
-        cartService.addToCart(id);
+    @GetMapping("/get")
+    public ResponseEntity<ShoppingCart> getCart() {
+        return new ResponseEntity<>(cartService.getCart(), HttpStatus.OK);
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<String> addToCart(@RequestBody Map<String, String> request) {
+        Long productId = Long.valueOf(request.get("productId"));
+        Long quantity = request.get("quantity") != null ? Long.valueOf(request.get("quantity")) : 1;
+        cartService.addToCart(productId, quantity);
         return new ResponseEntity<>("Product added to cart successfully", HttpStatus.OK);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateCart(@PathVariable("id") Long id, @RequestParam("quantity") int quantity) {
+    @PatchMapping("/updateQuantity")
+    public ResponseEntity<String> updateCart(@RequestBody Map<String, String> request) {
         try {
-            cartService.updateCart(id, quantity);
+            Long productId = Long.valueOf(request.get("productId"));
+            Long quantity = Long.valueOf(request.get("newQuantity"));
+            cartService.updateCart(productId, quantity);
             return new ResponseEntity<>("Cart updated successfully", HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
-    @DeleteMapping("/remove/{id}")
-    public ResponseEntity<String> removeFromCart(@PathVariable("id") Long id) {
-        cartService.removeFromCart(id);
-        return new ResponseEntity<>("Product removed from cart successfully", HttpStatus.OK);
+    @DeleteMapping("/remove")
+    public ResponseEntity<String> removeFromCart(@RequestBody Map<String, String> request) {
+        try {
+            Long productId = Long.valueOf(request.get("productId"));
+            cartService.removeFromCart(productId);
+            return new ResponseEntity<>("Product removed from cart successfully", HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+        }
     }
 
     @PostMapping("/checkout")

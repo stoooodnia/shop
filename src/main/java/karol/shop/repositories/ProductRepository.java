@@ -4,10 +4,8 @@ import karol.shop.models.Product;
 import karol.shop.models.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-
 import java.util.ArrayList;
-import java.util.List;
+
 
 @Repository
 public class ProductRepository implements IProductRepository{

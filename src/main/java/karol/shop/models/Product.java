@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-
 @Getter
 @Setter
 @Entity
@@ -21,7 +19,7 @@ public class Product
     private double price;
     private double deliveryPrice;
     private String description;
-    private int quantity;
+    private long quantity;
     private String details;
 
     private int averageRating; // 1 to 5 stars
@@ -33,7 +31,7 @@ public class Product
     }
 
 
-    public Product(long productId, String modelId, String title, String photoUrl, double price, double deliveryPrice, String description, int quantity, String details) {
+    public Product(long productId, String modelId, String title, String photoUrl, double price, double deliveryPrice, String description, long quantity, String details) {
         this.productId = productId;
         this.modelId = modelId;
         this.title = title;
@@ -45,7 +43,7 @@ public class Product
         this.details = details;
         this.averageRating = 0;
     }
-    public Product(long productId, String modelId, String title, String photoUrl, double price, double deliveryPrice, String description, int quantity, String details, int averageRating) {
+    public Product(long productId, String modelId, String title, String photoUrl, double price, double deliveryPrice, String description, long quantity, String details, int averageRating) {
         this.productId = productId;
         this.modelId = modelId;
         this.title = title;

@@ -6,8 +6,6 @@ import karol.shop.models.Review;
 import karol.shop.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
 
