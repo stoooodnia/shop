@@ -66,7 +66,7 @@ public class GeneralService {
     }
 
 
-    public Object getReviewById(long reviewId) {
+    public Review getReviewById(long reviewId) {
         return productRepository.getReviewById(reviewId);
     }
 
@@ -95,9 +95,6 @@ public class GeneralService {
         return models;
     }
 
-    public Object getModelsForm() {
-        return new ModelsFilterForm();
-    }
 
     public ArrayList<Product> getProductsByModelSortedByPrice(String modelString, String sortDirection) {
         ArrayList<Product> products = getProductsByModel(modelString);
@@ -115,6 +112,16 @@ public class GeneralService {
             products.sort(Comparator.comparingInt(Product::getAverageRating)); // inaczej bo krzyczało
         } else {
             products.sort((p1, p2) -> (p2.getAverageRating() - p1.getAverageRating()));
+        }
+        return products;
+    }
+
+    public ArrayList<Product> getProductsByModelSortedByDeliveryPrice(String modelString, String sortDirection) {
+        ArrayList<Product> products = getProductsByModel(modelString);
+        if (sortDirection.equals("asc")) {
+            products.sort((p1, p2) -> (int) (p1.getDeliveryPrice() - p2.getDeliveryPrice()));
+        } else {
+            products.sort((p1, p2) -> (int) (p2.getDeliveryPrice() - p1.getDeliveryPrice()));
         }
         return products;
     }

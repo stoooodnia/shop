@@ -7,10 +7,13 @@ import karol.shop.services.GeneralService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/products")
@@ -95,6 +98,9 @@ public class ProductRestController {
     public ResponseEntity<String> editReview(@PathVariable("id") Long productId, @PathVariable("reviewId") Long reviewId, @RequestBody Review review) {
         Product product = generalService.getProductById(productId);
         if (product != null) {
+            if (generalService.getReviewById(reviewId) == null) {
+                return new ResponseEntity<>("Review not found", HttpStatus.NOT_FOUND);
+            }
             review.setReviewId(reviewId);
             review.setProductId(productId);
             review.setDate(LocalDate.now().toString());
@@ -105,24 +111,46 @@ public class ProductRestController {
             return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
         }
     }
+    @PatchMapping("/{id}/reviews/edit/{reviewId}")
+    public ResponseEntity<String> editReview(@PathVariable("id") Long productId, @PathVariable("reviewId") Long reviewId, @RequestBody Map<String, String> reviewMap) {
+        Product product = generalService.getProductById(productId);
+        if (product != null) {
+            Review review = generalService.getReviewById(reviewId);
+            if(review == null) {
+                return new ResponseEntity<>("Review not found", HttpStatus.NOT_FOUND);
+            }
+            if(reviewMap.get("rating") != null) {
+                review.setRating(Integer.parseInt(reviewMap.get("rating")));
+            }
+            if(reviewMap.get("content") != null) {
+                review.setContent(reviewMap.get("content"));
+            }
+            if(reviewMap.get("author") != null) {
+                review.setAuthor(reviewMap.get("author"));
+            }
+            generalService.editReview(review);
+            generalService.updateAverageRating(productId);
+            return new ResponseEntity<>("Review edited successfully", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
+        }
+    }
 
     @GetMapping("/model/{model}")
-    public ResponseEntity<ArrayList<Product>> getProductsByModel(@PathVariable("model") String modelString,
+    public ResponseEntity<Object> getProductsByModel(@PathVariable("model") String modelString,
                                                             @RequestParam String sortOption,
                                                             @RequestParam String sortDirection) {
-        System.out.println("modelString: " + modelString);
-        ArrayList<Product> products;
-        switch (sortOption) {
-            case "price":
-                products = generalService.getProductsByModelSortedByPrice(modelString, sortDirection);
-                break;
-            case "rating":
-                products = generalService.getProductsByModelSortedByRating(modelString, sortDirection);
-                break;
-            default:
-                products = generalService.getProductsByModel(modelString);
-                break;
+
+        if (!generalService.getAvailableModels().contains(modelString) && !modelString.equals("all")) {
+            return new ResponseEntity<>("Model doesn't exist", HttpStatus.NOT_FOUND);
         }
+
+        ArrayList<Product> products = switch (sortOption) {
+            case "price" -> generalService.getProductsByModelSortedByPrice(modelString, sortDirection);
+            case "rating" -> generalService.getProductsByModelSortedByRating(modelString, sortDirection);
+            case "deliveryPrice" -> generalService.getProductsByModelSortedByDeliveryPrice(modelString, sortDirection);
+            default -> generalService.getProductsByModel(modelString);
+        };
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 

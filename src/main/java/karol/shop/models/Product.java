@@ -1,6 +1,7 @@
 package karol.shop.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,15 +14,25 @@ public class Product
     @Id
     @GeneratedValue(generator = "increment")
     private long productId;
+    @NotBlank(message = "ModelId cannot be empty!")
     private String modelId;
+    @NotBlank(message = "Title cannot be empty!")
     private String title;
+    @NotBlank(message = "PhotoUrl cannot be empty!")
     private String photoUrl;
+    @Positive(message = "Price must be positive!")
     private double price;
+    @PositiveOrZero(message = "DeliveryPrice cannot be negative!")
     private double deliveryPrice;
+    @NotBlank(message = "Description cannot be empty!")
     private String description;
+    @PositiveOrZero(message = "Quantity cannot be negative!")
     private long quantity;
+    @NotBlank(message = "Details cannot be empty!")
     private String details;
 
+    @Min(value = 0, message = "Average rating must be between 0 and 5!")
+    @Max(value = 5, message = "Average rating must be between 0 and 5!")
     private int averageRating; // 1 to 5 stars
 
 

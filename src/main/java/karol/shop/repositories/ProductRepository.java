@@ -65,7 +65,7 @@ public class ProductRepository implements IProductRepository{
 
     @Override
     public void editReview(Review review) {
-        ReviewDao.save(review); // TODO: to dziala przekornie, sprawdzic czy dziala
+        ReviewDao.save(review);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class ProductRepository implements IProductRepository{
     }
 
     @Override
-    public Object getReviewById(long reviewId) { return ReviewDao.findById(reviewId); }
+    public Review getReviewById(long reviewId) { return ReviewDao.findById(reviewId).orElse(null); }
 
 
 }
