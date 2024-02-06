@@ -1,15 +1,13 @@
 package karol.shop.controllers;
 
+import karol.shop.models.ModelsFilterForm;
 import karol.shop.models.Product;
 import karol.shop.models.Review;
 import karol.shop.services.CartService;
 import karol.shop.services.GeneralService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
@@ -31,10 +29,10 @@ public class AdminController {
         if (error != null) {
             model.addAttribute("errorMessage", error);
         }
-
+        model.addAttribute("availableModels", generalService.getAvailableModels());
+        model.addAttribute("modelsFilterForm", generalService.getModelsForm());
         model.addAttribute("allProducts", generalService.getAll());
         model.addAttribute("cart", cartService.getCart());
-        System.out.println("cart price: " + cartService.getCart().getTotalPrice());
 
         return "pages/admin/admin-general";
     }
@@ -141,5 +139,42 @@ public class AdminController {
         generalService.deleteReview(reviewIdParsed);
         generalService.updateAverageRating(productId);
         return "redirect:/admin";
+    }
+    @PostMapping("/admin/products/model-filter")
+    public String filterByModel(@ModelAttribute("modelsFilterForm") ModelsFilterForm modelsFilterForm){
+        String model = modelsFilterForm.getSelectedModel();
+        String sortOption = modelsFilterForm.getSelectedSortOption();
+        String sortDirection = modelsFilterForm.getSelectedSortDirection();
+        return "redirect:/admin/products/model=" + model + "?sortOption=" + sortOption + "&sortDirection=" + sortDirection;
+    }
+    @GetMapping("/admin/products/model={model}")
+    public String productsByModel(Model model,
+                                  @PathVariable("model") String modelString,
+                                  @RequestParam String sortOption,
+                                  @RequestParam String sortDirection){
+
+//        if(modelString == null || modelString.equals("") || modelString.equals("all")){
+//            return "redirect:/";
+//        }
+
+        switch (sortOption) {
+            case "price" ->
+                    model.addAttribute("allProducts", generalService.getProductsByModelSortedByPrice(modelString, sortDirection));
+            case "rating" ->
+                    model.addAttribute("allProducts", generalService.getProductsByModelSortedByRating(modelString, sortDirection));
+            case "deliveryPrice" ->
+                    model.addAttribute("allProducts", generalService.getProductsByModelSortedByDeliveryPrice(modelString, sortDirection));
+            default ->
+                    model.addAttribute("allProducts", generalService.getProductsByModel(modelString));
+        }
+
+        ModelsFilterForm modelsFilterForm = new ModelsFilterForm();
+        modelsFilterForm.setSelectedModel(modelString);
+        modelsFilterForm.setSelectedSortOption(sortOption);
+        modelsFilterForm.setSelectedSortDirection(sortDirection);
+        model.addAttribute("availableModels", generalService.getAvailableModels());
+        model.addAttribute("modelsFilterForm", modelsFilterForm);
+        model.addAttribute("cart", cartService.getCart());
+        return "pages/admin/admin-general";
     }
 }

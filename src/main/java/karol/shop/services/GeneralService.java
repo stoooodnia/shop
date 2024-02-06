@@ -119,4 +119,14 @@ public class GeneralService {
         }
         return products;
     }
+
+    public Object getProductsByModelSortedByDeliveryPrice(String modelString, String sortDirection) {
+        ArrayList<Product> products = getProductsByModel(modelString);
+        if (sortDirection.equals("asc")) {
+            products.sort((p1, p2) -> (int) (p1.getDeliveryPrice() - p2.getDeliveryPrice()));
+        } else {
+            products.sort((p1, p2) -> (int) (p2.getDeliveryPrice() - p1.getDeliveryPrice()));
+        }
+        return products;
+    }
 }

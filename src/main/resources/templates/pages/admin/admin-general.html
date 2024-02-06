@@ -14,6 +14,7 @@
   </div>
   <a href="/" class="button">WRACAM DO ROLI USERA!</a>
   <h1>Shop</h1>
+  <div th:replace="~{fragments/admin/admin-modelsFilter :: modelsFilter(modelsFilterForm=${modelsFilterForm}, availableModels=${availableModels} )}"></div>
   <div class="all-products-container" >
     <div th:each="product : ${allProducts}">
       <div th:replace="~{fragments/admin/admin-productCard :: productCard(product=${product})}"></div>

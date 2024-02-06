@@ -33,7 +33,6 @@ public class GeneralController {
         model.addAttribute("modelsFilterForm", generalService.getModelsForm());
         model.addAttribute("allProducts", generalService.getAll());
         model.addAttribute("cart", cartService.getCart());
-        System.out.println("cart price: " + cartService.getCart().getTotalPrice());
 
         return "pages/general";
     }
@@ -98,15 +97,14 @@ public class GeneralController {
 //        }
 
         switch (sortOption) {
-            case "price":
-                model.addAttribute("allProducts", generalService.getProductsByModelSortedByPrice(modelString, sortDirection));
-                break;
-            case "rating":
-                model.addAttribute("allProducts", generalService.getProductsByModelSortedByRating(modelString, sortDirection));
-                break;
-            default:
-                model.addAttribute("allProducts", generalService.getProductsByModel(modelString));
-                break;
+            case "price" ->
+                    model.addAttribute("allProducts", generalService.getProductsByModelSortedByPrice(modelString, sortDirection));
+            case "rating" ->
+                    model.addAttribute("allProducts", generalService.getProductsByModelSortedByRating(modelString, sortDirection));
+            case "deliveryPrice" ->
+                    model.addAttribute("allProducts", generalService.getProductsByModelSortedByDeliveryPrice(modelString, sortDirection));
+            default ->
+                    model.addAttribute("allProducts", generalService.getProductsByModel(modelString));
         }
 
         ModelsFilterForm modelsFilterForm = new ModelsFilterForm();
