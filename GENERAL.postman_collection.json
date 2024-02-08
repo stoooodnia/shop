@@ -1,0 +1,593 @@
+{
+	"info": {
+		"_postman_id": "2e1e483b-6756-4c53-9e14-6e7dac05d52e",
+		"name": "GENERAL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24364420"
+	},
+	"item": [
+		{
+			"name": "Get all products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8009/",
+					"host": [
+						"localhost"
+					],
+					"port": "8009",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get product details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8009/products/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "8009",
+					"path": [
+						"products",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get by model or/and sorted",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8009/products/model/:model?sortOption=price&sortDirection=asc",
+					"host": [
+						"localhost"
+					],
+					"port": "8009",
+					"path": [
+						"products",
+						"model",
+						":model"
+					],
+					"query": [
+						{
+							"key": "sortOption",
+							"value": "price"
+						},
+						{
+							"key": "sortDirection",
+							"value": "asc"
+						}
+					],
+					"variable": [
+						{
+							"key": "model",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"modelId\": \"HEADPHONES\",\n    \"title\": \"AirPods Pro 2\",\n    \"photoUrl\": \"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MTJV3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1694014871985\",\n    \"price\": 249.99,\n    \"deliveryPrice\": 7.99,\n    \"description\": \"Bezprzewodowe słuchawki douszne od Apple.\",\n    \"quantity\": 420,\n    \"details\": \"specyfikacje..\",\n    \"averageRating\": 0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8009/products/add",
+					"host": [
+						"localhost"
+					],
+					"port": "8009",
+					"path": [
+						"products",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete product",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8009/products/:id/delete",
+					"host": [
+						"localhost"
+					],
+					"port": "8009",
+					"path": [
+						"products",
+						":id",
+						"delete"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update whole product",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"modelId\": \"HEADPHONES\",\n    \"title\": \"AirPods Pro\",\n    \"photoUrl\": \"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MTJV3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1694014871985\",\n    \"price\": 249.99,\n    \"deliveryPrice\": 7.99,\n    \"description\": \"Bezprzewodowe słuchawki douszne od Apple.\",\n    \"quantity\": 420,\n    \"details\": \"specyfikacje..\",\n    \"averageRating\": 0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8009/products/:id/update",
+					"host": [
+						"localhost"
+					],
+					"port": "8009",
+					"path": [
+						"products",
+						":id",
+						"update"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update something in product",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "localhost:8009/products/:id/update",
+					"host": [
+						"localhost"
+					],
+					"port": "8009",
+					"path": [
+						"products",
+						":id",
+						"update"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add review",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"author\": \"tester1\",\n    \"rating\": 0,\n    \"content\": \"to jest przykładowa opinia2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8009/products/:id/reviews/add",
+					"host": [
+						"localhost"
+					],
+					"port": "8009",
+					"path": [
+						"products",
+						":id",
+						"reviews",
+						"add"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get average rating of product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8009/products/:id/rating",
+					"host": [
+						"localhost"
+					],
+					"port": "8009",
+					"path": [
+						"products",
+						":id",
+						"rating"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get product reviews",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8009/products/:id/reviews",
+					"host": [
+						"localhost"
+					],
+					"port": "8009",
+					"path": [
+						"products",
+						":id",
+						"reviews"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update whole review",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"author\": \"tester540\",\n    \"rating\": 2,\n    \"conent\": \"nowa opinia\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8009/products/:id/reviews/edit/:reviewId",
+					"host": [
+						"localhost"
+					],
+					"port": "8009",
+					"path": [
+						"products",
+						":id",
+						"reviews",
+						"edit",
+						":reviewId"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						},
+						{
+							"key": "reviewId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update something in review",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"rating\": 4\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8009/products/:id/reviews/edit/:reviewId",
+					"host": [
+						"localhost"
+					],
+					"port": "8009",
+					"path": [
+						"products",
+						":id",
+						"reviews",
+						"edit",
+						":reviewId"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						},
+						{
+							"key": "reviewId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete review",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8009/products/:id/reviews/delete/:reviewId",
+					"host": [
+						"localhost"
+					],
+					"port": "8009",
+					"path": [
+						"products",
+						":id",
+						"reviews",
+						"delete",
+						":reviewId"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						},
+						{
+							"key": "reviewId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add product to cart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"productId\": 1,\n    \"quantity\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8009/cart/add",
+					"host": [
+						"localhost"
+					],
+					"port": "8009",
+					"path": [
+						"cart",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove product from cart",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"productId\": 1    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8009/cart/remove",
+					"host": [
+						"localhost"
+					],
+					"port": "8009",
+					"path": [
+						"cart",
+						"remove"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update quantity of product in cart",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"productId\": 1,\n    \"newQuantity\": 3\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8009/cart/updateQuantity",
+					"host": [
+						"localhost"
+					],
+					"port": "8009",
+					"path": [
+						"cart",
+						"updateQuantity"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get summary",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let template = `",
+							"<script type=\"text/javascript\">",
+							"    // Variable works with actual base64 string in html, not passed by variable (aka below). Otherwise Postman crashes",
+							"    // window.location.href = \"{{base64data}}\"",
+							"",
+							"    // Variable works with https and file locations however...",
+							"    // window.location.href = \"{{webLocation}}\"",
+							"",
+							"    // Can also download downments with the following",
+							"    // window.location.href = \"/Users/Someone/Downloads/my_local_doc.pdf\"",
+							"",
+							"    window.location.href = \"data:application/pdf;base64,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ZmrxUIujw7Mjw+pJLYXHd3dGovj8KCcqXyCyTL6vCn17ocft0pI3QKtp2by5ZdPmzZsufX7tk0vXruHC2TNd5851nTm7S72jfqsuqlMij5c9A8VQzsl4N+rr2a+b7mWvZjvIjW3ODutrZpvJRBaP6/SRbuOGs9fTx93F7uKCcMhFLuFy+8kv/O4CKhBFrgJ3mMJigivsLqdyUe4qd3sqRKLePn4oi3x3C26MPvr6O787Ze/+AweGHlpfunok1g4d8t7xm6f0ynNr1mXdlqyDMdKtx3hVZVT8m4eNGeAq51AJTaLJdC9NJ+OfGkPX06tvMhYP5aXTI5On5dxTvXRJXd706oWrlsxdTvRnuhSqgQplbmRzdHJlYW0KZW5kb2JqCjE5IDAgb2JqCjMzMTUKZW5kb2JqCjEgMCBvYmoKPDwgL1RpdGxlIChoZWxsb193b3JsZCkgL1Byb2R1Y2VyIChtYWNPUyBWZXJzaW9uIDEwLjE1LjcgXChCdWlsZCAxOUgyXCkgUXVhcnR6IFBERkNvbnRleHQpCi9DcmVhdG9yIChUZXh0RWRpdCkgL0NyZWF0aW9uRGF0ZSAoRDoyMDIwMTAxNDEyNDU1MFowMCcwMCcpIC9Nb2REYXRlIChEOjIwMjAxMDE0MTI0NTUwWjAwJzAwJykKPj4KZW5kb2JqCnhyZWYKMCAyMAowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMTExMTAgMDAwMDAgbiAKMDAwMDAwMDI4MCAwMDAwMCBuIAowMDAwMDA2OTQwIDAwMDAwIG4gCjAwMDAwMDAwMjIgMDAwMDAgbiAKMDAwMDAwMDI2MSAwMDAwMCBuIAowMDAwMDAwMzg0IDAwMDAwIG4gCjAwMDAwMDY5MDQgMDAwMDAgbiAKMDAwMDAwNDEzMiAwMDAwMCBuIAowMDAwMDA3MDczIDAwMDAwIG4gCjAwMDAwMDA1MzMgMDAwMDAgbiAKMDAwMDAwMDU4NyAwMDAwMCBuIAowMDAwMDAwNjQwIDAwMDAwIG4gCjAwMDAwMDQxMTEgMDAwMDAgbiAKMDAwMDAwNDE2OCAwMDAwMCBuIAowMDAwMDA2ODgzIDAwMDAwIG4gCjAwMDAwMDcwMjMgMDAwMDAgbiAKMDAwMDAwNzQzMiAwMDAwMCBuIAowMDAwMDA3Njg0IDAwMDAwIG4gCjAwMDAwMTEwODkgMDAwMDAgbiAKdHJhaWxlcgo8PCAvU2l6ZSAyMCAvUm9vdCAxNiAwIFIgL0luZm8gMSAwIFIgL0lEIFsgPGJiOTk4ODRlNDJkNDYwYjU4ZGFmM2VlOGViMjNmNDFiPgo8YmI5OTg4NGU0MmQ0NjBiNThkYWYzZWU4ZWIyM2Y0MWI+IF0gPj4Kc3RhcnR4cmVmCjExMzE0CiUlRU9GCg==\"",
+							"",
+							"</script>`",
+							"",
+							"pm.visualizer.set(template, {",
+							"    base64data: pm.response.json()[\"hello_world.pdf\"],",
+							"    webLocation: pm.response.json().webLocation",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"deliveryMethod\": \"courier\",\n    \"street\": \"łączna\",\n    \"houseNumber\": \"43\",\n    \"apartament\": \"\",\n    \"postalCode\": \"01-123\",\n    \"city\": \"Lipinki Łużyckie\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8009/cart/checkout",
+					"host": [
+						"localhost"
+					],
+					"port": "8009",
+					"path": [
+						"cart",
+						"checkout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get cart",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8009/cart",
+					"host": [
+						"localhost"
+					],
+					"port": "8009",
+					"path": [
+						"cart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8009/cart/download-summary",
+					"host": [
+						"localhost"
+					],
+					"port": "8009",
+					"path": [
+						"cart",
+						"download-summary"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

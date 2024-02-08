@@ -70,7 +70,7 @@ public class ProductRepository implements IProductRepository{
 
     @Override
     public ArrayList<Review> getReviewsOf(long product_id) {
-        return ReviewDao.findByProductId(product_id);
+        return (ArrayList<Review>) ProductDao.findReviewsByProductId(product_id);
     }
 
     @Override
