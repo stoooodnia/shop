@@ -5,6 +5,8 @@ import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -30,10 +32,12 @@ public class Product
     private long quantity;
     @NotBlank(message = "Details cannot be empty!")
     private String details;
-
     @Min(value = 0, message = "Average rating must be between 0 and 5!")
     @Max(value = 5, message = "Average rating must be between 0 and 5!")
     private int averageRating; // 1 to 5 stars
+
+    @OneToMany(mappedBy = "productId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Review> reviews;
 
 
 

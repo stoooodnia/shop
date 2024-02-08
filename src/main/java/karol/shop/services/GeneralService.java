@@ -1,11 +1,13 @@
 package karol.shop.services;
 
-import karol.shop.models.ModelsFilterForm;
+import jakarta.transaction.Transactional;
 import karol.shop.models.Product;
 import karol.shop.models.Review;
 import karol.shop.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.beans.Transient;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -22,8 +24,17 @@ public class GeneralService {
         return productRepository.findAllProducts();
     }
 
-    public void addReview(Review review) {
-        productRepository.addReview(review);
+    @Transactional
+    public Review addReview(Long productId, Review review) {
+        Product product = productRepository.getProductById(productId);
+        if (product == null) {
+            return null;
+        }
+        review.setProduct(product);
+        product.getReviews().add(review);
+        productRepository.addProduct(product);
+        updateAverageRating(productId);
+        return review;
     }
 
     public int getAverageRatingOf(long productId) {
@@ -47,8 +58,21 @@ public class GeneralService {
         productRepository.deleteReview(reviewId);
     }
 
-    public void editReview(Review review) {
+    @Transactional
+    public Review editReview(Long productId, Long reviewId, Review review) {
+        Product product = productRepository.getProductById(productId);
+        Review oldReview = productRepository.getReviewById(reviewId);
+        if (product == null || oldReview == null) {
+            return null;
+        }
+        review.setProduct(product);
+        review.setReviewId(reviewId);
+        product.getReviews().remove(oldReview);
+        product.getReviews().add(review);
+        productRepository.updateProduct(product);
         productRepository.editReview(review);
+        updateAverageRating(productId);
+        return review;
     }
 
     public Product getProductById(long productId) {

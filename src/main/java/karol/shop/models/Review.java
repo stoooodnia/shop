@@ -1,8 +1,6 @@
 package karol.shop.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 import lombok.Getter;
@@ -12,11 +10,12 @@ import lombok.Setter;
 @Setter
 @Entity
 public class Review {
-
     @Id
     @GeneratedValue(generator = "increment")
     private long reviewId;
-    private long productId;
+    @ManyToOne
+    @JoinColumn(name = "product")
+    private Product product;
     @NotBlank(message = "Author cannot be empty!")
     private String author;
     private String date;
@@ -27,8 +26,7 @@ public class Review {
     private String content;
 
     public Review() {}
-    public Review(long productId, String author, String date, int rating, String content) {
-        this.productId = productId;
+    public Review(String author, String date, int rating, String content) {
         this.author = author;
         this.date = date;
         this.rating = rating;

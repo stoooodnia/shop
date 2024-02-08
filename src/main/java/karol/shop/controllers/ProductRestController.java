@@ -1,5 +1,6 @@
 package karol.shop.controllers;
 
+import jakarta.transaction.Transactional;
 import karol.shop.models.Product;
 import karol.shop.models.Review;
 import karol.shop.services.CartService;
@@ -70,12 +71,8 @@ public class ProductRestController {
 
     @PostMapping("/{id}/reviews/add")
     public ResponseEntity<String> addReview(@PathVariable("id") Long productId, @RequestBody Review review) {
-        Product product = generalService.getProductById(productId);
-        if (product != null) {
-            review.setProductId(product.getProductId());
-            review.setDate(LocalDate.now().toString());
-            generalService.addReview(review);
-            generalService.updateAverageRating(productId);
+        Review newReview = generalService.addReview(productId, review);
+        if(newReview != null) {
             return new ResponseEntity<>("Review added successfully", HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
@@ -96,16 +93,8 @@ public class ProductRestController {
     }
     @PutMapping("/{id}/reviews/edit/{reviewId}")
     public ResponseEntity<String> editReview(@PathVariable("id") Long productId, @PathVariable("reviewId") Long reviewId, @RequestBody Review review) {
-        Product product = generalService.getProductById(productId);
-        if (product != null) {
-            if (generalService.getReviewById(reviewId) == null) {
-                return new ResponseEntity<>("Review not found", HttpStatus.NOT_FOUND);
-            }
-            review.setReviewId(reviewId);
-            review.setProductId(productId);
-            review.setDate(LocalDate.now().toString());
-            generalService.editReview(review);
-            generalService.updateAverageRating(productId);
+        Review newReview = generalService.editReview(productId, reviewId, review);
+        if (newReview != null) {
             return new ResponseEntity<>("Review edited successfully", HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
@@ -113,23 +102,21 @@ public class ProductRestController {
     }
     @PatchMapping("/{id}/reviews/edit/{reviewId}")
     public ResponseEntity<String> editReview(@PathVariable("id") Long productId, @PathVariable("reviewId") Long reviewId, @RequestBody Map<String, String> reviewMap) {
-        Product product = generalService.getProductById(productId);
-        if (product != null) {
-            Review review = generalService.getReviewById(reviewId);
-            if(review == null) {
-                return new ResponseEntity<>("Review not found", HttpStatus.NOT_FOUND);
-            }
-            if(reviewMap.get("rating") != null) {
-                review.setRating(Integer.parseInt(reviewMap.get("rating")));
-            }
-            if(reviewMap.get("content") != null) {
-                review.setContent(reviewMap.get("content"));
-            }
-            if(reviewMap.get("author") != null) {
-                review.setAuthor(reviewMap.get("author"));
-            }
-            generalService.editReview(review);
-            generalService.updateAverageRating(productId);
+        Review review = generalService.getReviewById(reviewId);
+        if(review == null) {
+            return new ResponseEntity<>("Review not found", HttpStatus.NOT_FOUND);
+        }
+        if(reviewMap.get("rating") != null) {
+            review.setRating(Integer.parseInt(reviewMap.get("rating")));
+        }
+        if(reviewMap.get("content") != null) {
+            review.setContent(reviewMap.get("content"));
+        }
+        if(reviewMap.get("author") != null) {
+            review.setAuthor(reviewMap.get("author"));
+        }
+        Review newReview = generalService.editReview(productId, reviewId, review);
+        if (newReview != null) {
             return new ResponseEntity<>("Review edited successfully", HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
